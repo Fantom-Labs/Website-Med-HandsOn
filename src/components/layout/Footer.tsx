@@ -16,7 +16,7 @@ export function Footer() {
                <img src="/logo-footer.svg" alt="Med HandsOn" className="h-12 w-auto" />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed" style={{ fontFamily: 'var(--font-open-sans), sans-serif' }}>
-              O futuro do ensino médico é real. Aprenda na prática com especialistas renomados.
+              O futuro do ensino médico é real. Aprenda na prática com especialistas.
             </p>
           </div>
 
@@ -58,7 +58,7 @@ export function Footer() {
                 +55 (11) 99999-9999
               </li>
               <li className="text-gray-400 text-sm">
-                São Paulo, SP
+                Recife, PE
               </li>
             </ul>
           </div>
