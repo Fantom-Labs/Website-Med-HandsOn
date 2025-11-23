@@ -34,9 +34,8 @@ export function Section4() {
 
   return (
     <section 
-      className="relative w-full overflow-hidden py-12 md:py-0"
+      className="relative w-full overflow-hidden py-12 md:py-0 min-h-[600px] lg:min-h-[700px] xl:min-h-[800px]"
       style={{ 
-        minHeight: '800px',
         background: 'radial-gradient(circle, rgba(7, 125, 234, 0.3) 0%, #09111F 100%)',
         backgroundColor: '#09111F'
       }}
