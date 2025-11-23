@@ -6,9 +6,18 @@ import { ArrowUpRight, Calendar, ChevronRight } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="relative bg-[#09111F] text-white py-20 md:py-32 overflow-hidden min-h-[800px] flex items-center">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
+    <section className="relative bg-[#09111F] text-white pt-28 pb-16 md:py-32 overflow-hidden min-h-[600px] md:min-h-[800px] flex items-center">
+      {/* Mobile Background */}
+      <div 
+        className="absolute inset-0 z-0 md:hidden"
+        style={{ 
+          background: 'radial-gradient(circle, rgba(7, 125, 234, 0.3) 0%, #09111F 100%)',
+          backgroundColor: '#09111F'
+        }}
+      />
+
+      {/* Desktop Background Image */}
+      <div className="absolute inset-0 z-0 hidden md:block">
         <Image
           src="/images/hero-img.png"
           alt="Background"
@@ -18,8 +27,6 @@ export function HeroSection() {
           quality={100}
           unoptimized
         />
-        {/* Gradiente lateral para garantir leitura do texto na direita */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#09111F]/20 to-[#09111F]/90 z-10"></div>
       </div>
 
       {/* WhatsApp Floating Button */}
@@ -48,54 +55,68 @@ export function HeroSection() {
           </Link>
         </div>
 
-        <div className="flex justify-end">
-          <div className="max-w-2xl w-full">
-            
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-8 w-fit">
+      <div className="flex justify-center md:justify-end">
+        <div className="max-w-2xl w-full flex flex-col items-center md:items-start">
+          
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-6 md:mb-8 w-fit">
               <Calendar className="w-4 h-4 text-gray-300" />
               <span className="text-sm font-medium tracking-wide text-gray-200 uppercase">
-                ÚLTIMAS VAGAS · RINOPLASTIA ULTRASSÔNICA AVANÇADA
+                <span className="md:hidden">ÚLTIMAS VAGAS · RINOPLASTIA ULTRASSÔNICA</span>
+                <span className="hidden md:inline">ÚLTIMAS VAGAS · RINOPLASTIA ULTRASSÔNICA AVANÇADA</span>
               </span>
             </div>
 
-            {/* Title Section */}
-            <div className="relative mb-6">
-              <h1 
-                className="text-[52px] font-semibold leading-tight"
-                style={{ fontFamily: 'var(--font-open-sans), sans-serif' }}
-              >
-                <div className="flex items-center gap-3 flex-wrap">
-                  Aprenda com quem
-                  <div className="inline-flex items-center justify-center">
-                     <img src="/images/icone heading.svg" alt="" className="min-w-[80px] h-auto" />
-                  </div>
-                </div>
-                <div className="flex items-center gap-3 flex-wrap mt-2">
-                  opera e participe
-                  <div className="relative h-10 w-28 min-w-[80px]">
-                    <Image 
-                      src="/images/MINIATURAS HEADING.png" 
-                      alt="Alunos" 
-                      fill 
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-                <span className="block mt-2">de cirurgias reais.</span>
-              </h1>
+          {/* Title Section */}
+          <div className="relative mb-6 w-full">
+            {/* Mobile Image */}
+            <div className="md:hidden flex justify-center mb-4">
+              <div className="relative h-[3.9rem] w-[9.75rem]">
+                <Image 
+                  src="/images/MINIATURAS HEADING.png" 
+                  alt="Alunos" 
+                  fill 
+                  className="object-contain"
+                  quality={100}
+                  unoptimized
+                />
+              </div>
             </div>
-            
-            <p 
-              className="text-lg text-gray-300 mb-10 leading-relaxed max-w-xl"
+
+            <h1 
+              className="text-[36px] sm:text-4xl md:text-[52px] font-semibold leading-tight text-center md:text-left"
               style={{ fontFamily: 'var(--font-open-sans), sans-serif' }}
             >
+              <div className="flex items-center justify-center md:justify-start gap-2 md:gap-3 flex-wrap">
+                Aprenda com quem
+              </div>
+              <div className="flex items-center justify-center md:justify-start gap-2 md:gap-3 flex-wrap mt-2">
+                opera e participe
+                <div className="hidden md:block relative h-[3.9rem] sm:h-[52px] w-[9.75rem] sm:w-36 min-w-[156px] sm:min-w-[104px]">
+                  <Image 
+                    src="/images/MINIATURAS HEADING.png" 
+                    alt="Alunos" 
+                    fill 
+                    className="object-contain"
+                    quality={100}
+                    unoptimized
+                  />
+                </div>
+              </div>
+              <span className="block mt-2">de cirurgias reais.</span>
+            </h1>
+          </div>
+          
+          <p 
+            className="text-base md:text-lg text-gray-300 mb-8 md:mb-10 leading-relaxed max-w-xl text-center md:text-left"
+            style={{ fontFamily: 'var(--font-open-sans), sans-serif' }}
+          >
               A <strong className="text-white">única escola médica do Brasil</strong> onde você aprende dentro de cirurgias reais, com <strong className="text-white">pacientes reais</strong> e especialistas que vivem a medicina todos os dias.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-              <Link
-                href="#cursos"
+          <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-center">
+            <Link
+              href="/cursos"
                 className="bg-[#077DEA] hover:bg-[#0062B9] text-white px-8 py-4 rounded-lg font-medium transition-colors text-base flex items-center gap-2"
               >
                 Ver cursos disponíveis
@@ -103,7 +124,7 @@ export function HeroSection() {
               </Link>
               <Link
                 href="/quem-somos"
-                className="text-gray-300 hover:text-white px-8 py-4 font-medium transition-colors text-base flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10"
+                className="hidden sm:flex text-gray-300 hover:text-white px-8 py-4 font-medium transition-colors text-base items-center gap-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10"
               >
                 Saiba mais
                 <img src="/arrows.svg" alt="" className="w-4 h-4" />

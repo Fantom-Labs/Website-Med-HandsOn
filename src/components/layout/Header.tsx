@@ -14,7 +14,7 @@ export function Header() {
       <div className="container mx-auto px-4 md:px-6 h-full">
         <div className="flex h-full items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center no-underline border-none outline-none">
             <Image
               src="/logo.svg"
               alt="MedHandsOn Logo"
@@ -27,6 +27,9 @@ export function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
+            <Link href="/" className="font-medium transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
+              Home
+            </Link>
             <Link href="/blog" className="font-medium transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
               Blog
             </Link>
@@ -71,55 +74,90 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="md:hidden border-t bg-white">
-          <div className="container px-4 py-4 space-y-4">
-            <Link 
-              href="/blog" 
-              className="block font-medium hover:text-primary-600"
-              style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          onClick={() => setIsMenuOpen(false)}
+        />
+      )}
+
+      {/* Mobile Menu Sidebar */}
+      <div 
+        className={`fixed top-0 right-0 h-full w-[80%] max-w-sm bg-white z-50 transform transition-transform duration-300 ease-in-out md:hidden shadow-xl ${
+          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="flex flex-col h-full">
+          <div className="flex items-center justify-between p-4 border-b">
+            <span className="font-semibold text-lg text-[#252525]">Menu</span>
+            <button
+              className="p-2 text-[#252525]"
               onClick={() => setIsMenuOpen(false)}
             >
-              Blog
-            </Link>
-            <Link 
-              href="/quem-somos" 
-              className="block font-medium hover:text-primary-600"
-              style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Quem Somos
-            </Link>
-            <Link 
-              href="/quem-somos#contato" 
-              className="block font-medium hover:text-primary-600"
-              style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contato
-            </Link>
-            <Button 
-              asChild 
-              className="w-full text-white px-6"
-              style={{
-                background: 'linear-gradient(180deg, #0085FF 0%, #00488A 100%)',
-                borderRadius: '8px',
-                border: 'none',
-                paddingTop: '24px',
-                paddingBottom: '24px',
-                fontSize: '18px',
-                fontWeight: 500
-              }}
-            >
-              <Link href="/cursos" onClick={() => setIsMenuOpen(false)} className="flex items-center justify-center">
-                Ver Cursos Disponíveis
-                <ArrowUpRight className="ml-2 h-4 w-4" />
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+
+          <div className="flex-1 overflow-y-auto p-4 space-y-6">
+            <nav className="space-y-4">
+              <Link 
+                href="/" 
+                className="block font-medium text-lg hover:text-primary-600"
+                style={{ color: '#252525', fontFamily: 'var(--font-open-sans), sans-serif' }}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
               </Link>
-            </Button>
+              <Link 
+                href="/blog" 
+                className="block font-medium text-lg hover:text-primary-600"
+                style={{ color: '#252525', fontFamily: 'var(--font-open-sans), sans-serif' }}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link 
+                href="/quem-somos" 
+                className="block font-medium text-lg hover:text-primary-600"
+                style={{ color: '#252525', fontFamily: 'var(--font-open-sans), sans-serif' }}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Quem Somos
+              </Link>
+              <Link 
+                href="/quem-somos#contato" 
+                className="block font-medium text-lg hover:text-primary-600"
+                style={{ color: '#252525', fontFamily: 'var(--font-open-sans), sans-serif' }}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contato
+              </Link>
+            </nav>
+
+            <div className="pt-4">
+              <Button 
+                asChild 
+                className="w-full text-white px-6"
+                style={{
+                  background: 'linear-gradient(180deg, #0085FF 0%, #00488A 100%)',
+                  borderRadius: '8px',
+                  border: 'none',
+                  paddingTop: '24px',
+                  paddingBottom: '24px',
+                  fontSize: '18px',
+                  fontWeight: 500
+                }}
+              >
+                <Link href="/cursos" onClick={() => setIsMenuOpen(false)} className="flex items-center justify-center">
+                  Ver Cursos Disponíveis
+                  <ArrowUpRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

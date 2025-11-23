@@ -9,7 +9,10 @@ export function Section3() {
   return (
     <section className="flex flex-col md:flex-row w-full" style={{ backgroundColor: 'transparent' }}>
       {/* Left Side - Image */}
-      <div className="w-full md:w-1/2 flex items-center justify-center md:justify-end py-16 md:py-24" style={{ paddingRight: '160px', backgroundColor: 'transparent' }}>
+      <div 
+        className="w-full md:w-1/2 flex items-center justify-center md:justify-end py-8 md:py-24 md:pr-[160px]" 
+        style={{ backgroundColor: 'transparent' }}
+      >
         <Image
           src="/images/image s3.png"
           alt="Profissional médico em cirurgia"
