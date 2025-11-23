@@ -31,6 +31,8 @@ export default function RinoplastiaPage() {
           duration="4 semanas"
           location="Recife, PE"
           imageSrc="/images/img-c1.png"
+          mobileImageSrc="/images/hero-home-mobile.png"
+          mobileBgColor="#091222"
         />
         
         <div className="container mx-auto px-4 py-12">
@@ -96,7 +98,12 @@ export default function RinoplastiaPage() {
                     <p className="text-3xl font-bold text-primary-600">R$ 5.997,00</p>
                     <p className="text-sm text-primary-500">ou 12x de R$ 599,70</p>
                   </div>
-                  <button className="w-full bg-primary-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-primary-700 transition-colors shadow-lg shadow-primary-600/20 cursor-pointer">
+                  <button 
+                    className="w-full text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition-opacity shadow-lg shadow-primary-600/20 cursor-pointer"
+                    style={{
+                      background: 'linear-gradient(180deg, #0085FF 0%, #00488A 100%)',
+                    }}
+                  >
                     Garantir Minha Vaga
                   </button>
                 </div>

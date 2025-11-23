@@ -68,21 +68,7 @@ export function HeroSection() {
             </div>
 
           {/* Title Section */}
-          <div className="relative mb-6 w-full">
-            {/* Mobile Image */}
-            <div className="md:hidden flex justify-center mb-4">
-              <div className="relative h-[3.9rem] w-[9.75rem]">
-                <Image 
-                  src="/images/MINIATURAS HEADING.png" 
-                  alt="Alunos" 
-                  fill 
-                  className="object-contain"
-                  quality={100}
-                  unoptimized
-                />
-              </div>
-            </div>
-
+          <div className="relative mb-0 md:mb-6 w-full">
             <h1 
               className="text-[36px] sm:text-4xl md:text-[52px] font-semibold leading-tight text-center md:text-left"
               style={{ fontFamily: 'var(--font-open-sans), sans-serif' }}
@@ -105,6 +91,20 @@ export function HeroSection() {
               </div>
               <span className="block mt-2">de cirurgias reais.</span>
             </h1>
+            
+            {/* Mobile Image */}
+            <div className="md:hidden flex justify-center mt-2 mb-2">
+              <div className="relative h-[5.07rem] w-[12.675rem]">
+                <Image 
+                  src="/images/miniaturas-mobile.png" 
+                  alt="Alunos" 
+                  fill 
+                  className="object-contain"
+                  quality={100}
+                  unoptimized
+                />
+              </div>
+            </div>
           </div>
           
           <p 

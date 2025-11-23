@@ -40,7 +40,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/contato" className="text-gray-400 hover:text-white transition-colors text-sm">
+                <Link href="/quem-somos#contato" className="text-gray-400 hover:text-white transition-colors text-sm">
                   Contato
                 </Link>
               </li>
@@ -71,15 +71,15 @@ export function Footer() {
                 <Instagram size={20} />
               </a>
               <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#077DEA] transition-colors">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#077DEA] transition-colors">
                 <Linkedin size={20} />
               </a>
               <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#077DEA] transition-colors">
                 <Youtube size={20} />
               </a>
             </div>
+            <p className="text-gray-500 text-sm mt-6">
+              Desenvolvido por <a href="https://fantomweb.com.br" target="_blank" rel="noopener noreferrer" className="text-white font-medium">Fantom</a>
+            </p>
           </div>
         </div>
 

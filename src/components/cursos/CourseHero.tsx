@@ -8,24 +8,53 @@ interface CourseHeroProps {
   duration: string;
   location: string;
   imageSrc?: string;
+  mobileImageSrc?: string;
+  mobileBgColor?: string;
 }
 
-export function CourseHero({ title, description, startDate, duration, location, imageSrc }: CourseHeroProps) {
+export function CourseHero({ title, description, startDate, duration, location, imageSrc, mobileImageSrc, mobileBgColor }: CourseHeroProps) {
   return (
-    <section className="relative text-white py-24 overflow-hidden">
-      {/* Background Image */}
-      {imageSrc ? (
+    <section className="relative text-white py-12 md:py-24 overflow-hidden bg-[#09111F]" style={{ backgroundColor: mobileBgColor ? undefined : '#09111F' }}>
+      {/* Background Image - Mobile Override */}
+      {mobileBgColor && (
+        <div className="absolute inset-0 z-0 md:hidden" style={{ backgroundColor: mobileBgColor }} />
+      )}
+
+      {/* Background Image - Default/Desktop */}
+      <div 
+        className={`absolute inset-0 z-0 ${mobileBgColor ? 'hidden md:block' : ''}`}
+        style={{ 
+          background: 'radial-gradient(circle, rgba(7, 125, 234, 0.3) 0%, #09111F 100%)',
+          backgroundColor: '#09111F'
+        }} 
+      />
+      
+      {imageSrc && (
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+          className={`absolute inset-0 bg-cover bg-center bg-no-repeat z-0 ${mobileImageSrc ? 'hidden md:block' : ''}`}
           style={{ backgroundImage: `url(${imageSrc})` }}
         />
-      ) : (
-        <div className="absolute inset-0 bg-gradient-to-b from-primary-900 to-primary-700 z-0" />
       )}
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl">
-          <h1 className="text-4xl md:text-[52px] font-bold mb-6 leading-tight">
+          {mobileImageSrc && (
+            <div className="-mt-12 mb-6 w-screen ml-[calc(50%-50vw)] md:hidden">
+              <div className="relative">
+                <img 
+                  src={mobileImageSrc} 
+                  alt={title}
+                  className="w-full h-auto object-cover"
+                />
+                <div 
+                  className="absolute bottom-0 left-0 right-0 h-32"
+                  style={{ background: `linear-gradient(to top, ${mobileBgColor || '#09111F'}, transparent)` }}
+                />
+              </div>
+            </div>
+          )}
+          
+          <h1 className="text-3xl md:text-[52px] font-bold mb-6 leading-tight">
             {title}
           </h1>
           <p className="text-xl text-primary-50 mb-8 leading-relaxed max-w-2xl">
@@ -49,7 +78,7 @@ export function CourseHero({ title, description, startDate, duration, location, 
 
           <div className="flex flex-col sm:flex-row gap-4">
             <Button size="lg" className="bg-white text-primary-900 hover:bg-primary-50 cursor-pointer border-0">
-              Inscrever-se Agora
+              Inscrever-se agora
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
