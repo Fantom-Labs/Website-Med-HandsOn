@@ -6,7 +6,7 @@ import { ArrowUpRight, Calendar, ChevronRight } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="relative bg-[#09111F] text-white pt-28 pb-16 md:py-32 overflow-hidden min-h-[600px] md:min-h-[800px] flex items-center">
+    <section className="relative bg-[#09111F] text-white pt-28 pb-16 md:py-32 overflow-hidden min-h-[600px] md:min-h-[650px] 2xl:min-h-[800px] flex items-center">
       {/* Mobile Background */}
       <div 
         className="absolute inset-0 z-0 md:hidden"
@@ -41,28 +41,28 @@ export function HeroSection() {
 
       <div className="container mx-auto px-4 md:px-6 relative z-20">
         {/* Card Flutuante com Blur */}
-        <div className="hidden lg:block absolute left-0 -bottom-[90px] max-w-sm w-full bg-[#0f1c2e]/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-2xl z-30">
+        <div className="hidden lg:flex flex-col justify-center absolute left-0 -bottom-[90px] max-w-[350px] w-full h-[210px] bg-[#0f1c2e]/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-2xl z-30">
           <h3 className="text-2xl font-bold text-white mb-3">Rinoplastia Ultrassônica</h3>
-          <p className="text-gray-200 text-base mb-8 leading-relaxed">
-            Domine as habilidades necessárias para realizar Rinoplastia com formação completa com pacientes reais.
+          <p className="text-gray-200 text-[14px] mb-2 leading-relaxed max-w-[300px]">
+            Domine as habilidades necessárias para realizar a Rinoplastia com pacientes reais.
           </p>
           <Link 
             href="/cursos/rinoplastia-ultrassonica" 
-            className="flex items-center justify-between w-full bg-white/10 hover:bg-white/20 border border-white/10 rounded-lg px-6 py-4 transition-all group"
+            className="flex items-center justify-between w-full bg-white/10 hover:bg-white/20 border border-white/10 rounded-lg px-6 py-4 transition-all group max-w-[300px]"
           >
             <span className="font-medium text-white">Conhecer o curso</span>
             <ArrowUpRight className="w-5 h-5 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
         </div>
 
-      <div className="flex justify-center md:justify-end">
+      <div className="flex justify-center md:justify-end mb-[110px]">
         <div className="max-w-2xl w-full flex flex-col items-center md:items-start">
           
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-6 md:mb-8 w-fit">
               <Calendar className="w-4 h-4 text-gray-300" />
               <span className="text-sm font-medium tracking-wide text-gray-200 uppercase">
-                <span className="md:hidden">ÚLTIMAS VAGAS · RINOPLASTIA ULTRASSÔNICA</span>
+                <span className="md:hidden">ÚLTIMAS VAGAS·RINOPLASTIA ULTRASSÔNICA</span>
                 <span className="hidden md:inline">ÚLTIMAS VAGAS · RINOPLASTIA ULTRASSÔNICA AVANÇADA</span>
               </span>
             </div>
