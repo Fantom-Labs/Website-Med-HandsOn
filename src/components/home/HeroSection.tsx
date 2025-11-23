@@ -62,7 +62,7 @@ export function HeroSection() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-6 md:mb-8 w-fit">
               <Calendar className="w-4 h-4 text-gray-300" />
               <span className="text-sm font-medium tracking-wide text-gray-200 uppercase">
-                <span className="md:hidden">INSCREVA-SE · RINOPLASTIA ULTRASSÔNICA</span>
+                <span className="md:hidden">ÚLTIMAS VAGAS · RINOPLASTIA</span>
                 <span className="hidden md:inline">ÚLTIMAS VAGAS · RINOPLASTIA ULTRASSÔNICA AVANÇADA</span>
               </span>
             </div>

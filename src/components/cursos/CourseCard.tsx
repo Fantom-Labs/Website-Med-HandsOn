@@ -65,3 +65,4 @@ export function CourseCard({ title, description, image, features, link }: Course
   );
 }
 
+
