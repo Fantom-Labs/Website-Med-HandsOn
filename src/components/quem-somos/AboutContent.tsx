@@ -9,7 +9,7 @@ export function AboutContent() {
           {/* Text Content (Left) */}
           <div className="w-full lg:w-1/2 order-2 lg:order-1">
             {/* Tag/Badge */}
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-[#0056b3]/20 bg-white mb-6">
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-[#0056b3]/20 mb-6">
               <div className="w-2 h-2 rounded-full bg-[#0085FF] mr-2"></div>
               <span className="text-sm font-medium text-[#0056b3]">Sobre</span>
             </div>

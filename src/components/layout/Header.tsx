@@ -27,16 +27,16 @@ export function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/" className="font-medium transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
+            <Link href="/" className="font-semibold transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
               Home
             </Link>
-            <Link href="/blog" className="font-medium transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
+            <Link href="/blog" className="font-semibold transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
               Blog
             </Link>
-            <Link href="/quem-somos" className="font-medium transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
+            <Link href="/quem-somos" className="font-semibold transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
               Quem Somos
             </Link>
-            <Link href="/quem-somos#contato" className="font-medium transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
+            <Link href="/quem-somos#contato" className="font-semibold transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
               Contato
             </Link>
           </nav>
