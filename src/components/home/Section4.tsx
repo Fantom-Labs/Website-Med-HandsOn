@@ -122,8 +122,6 @@ export function Section4() {
                     fill
                     className="object-cover rounded-2xl"
                     priority
-                    quality={100}
-                    unoptimized
                   />
                  </div>
                </div>

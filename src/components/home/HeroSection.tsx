@@ -24,8 +24,6 @@ export function HeroSection() {
           fill
           className="object-cover object-center"
           priority
-          quality={100}
-          unoptimized
         />
       </div>
 
@@ -84,8 +82,6 @@ export function HeroSection() {
                     alt="Alunos" 
                     fill 
                     className="object-contain"
-                    quality={100}
-                    unoptimized
                   />
                 </div>
               </div>
@@ -100,8 +96,6 @@ export function HeroSection() {
                   alt="Alunos" 
                   fill 
                   className="object-contain"
-                  quality={100}
-                  unoptimized
                 />
               </div>
             </div>

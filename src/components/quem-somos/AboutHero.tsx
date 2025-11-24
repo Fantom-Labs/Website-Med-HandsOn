@@ -13,8 +13,6 @@ export function AboutHero() {
           fill
           className="object-cover object-top"
           priority
-          quality={100}
-          unoptimized
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#09111F] via-[#09111F] to-transparent z-10 opacity-90"></div>
       </div>
@@ -27,8 +25,6 @@ export function AboutHero() {
           fill
           className="object-cover object-center"
           priority
-          quality={100}
-          unoptimized
         />
         {/* Overlay gradiente para garantir leitura se necessário, mas o design parece limpo */}
          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#09111F]/20 to-[#09111F]/90 z-10 lg:via-[#09111F]/10 lg:to-[#09111F]/80"></div>
