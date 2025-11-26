@@ -20,9 +20,9 @@ export function ContactSection() {
     setStatus("idle");
 
     // EmailJS Configuration
-    const SERVICE_ID = "website_medhandson";
-    const TEMPLATE_ID = "medhandson";
-    const PUBLIC_KEY = "pitG1Ix1kR7VF_cqs";
+    const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "website_medhandson";
+    const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "medhandson";
+    const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "pitG1Ix1kR7VF_cqs";
 
     const templateParams = {
       name: formData.name,
@@ -31,6 +31,7 @@ export function ContactSection() {
     };
 
     try {
+      console.log("Enviando email..."); // Debug log
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
       
       setStatus("success");
