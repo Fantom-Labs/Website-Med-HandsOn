@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui/Button";
 
 export function ContactSection() {
@@ -10,10 +11,39 @@ export function ContactSection() {
     message: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Implementar lógica de envio aqui
-    console.log("Form submitted:", formData);
+    setLoading(true);
+    setStatus("idle");
+
+    // EmailJS Configuration
+    const SERVICE_ID = "website_medhandson";
+    const TEMPLATE_ID = "medhandson";
+    const PUBLIC_KEY = "pitG1Ix1kR7VF_cqs";
+
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+    };
+
+    try {
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" }); // Limpa o formulário
+      
+      // Remove a mensagem de sucesso após 5 segundos
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch (error) {
+      console.error("Erro ao enviar email:", error);
+      setStatus("error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -54,6 +84,8 @@ export function ContactSection() {
                 <input
                   type="text"
                   id="name"
+                  name="name"
+                  required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="w-full bg-[#0f1c2e] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#0085FF] focus:border-transparent transition-all"
@@ -69,6 +101,8 @@ export function ContactSection() {
                 <input
                   type="email"
                   id="email"
+                  name="email"
+                  required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="w-full bg-[#0f1c2e] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#0085FF] focus:border-transparent transition-all"
@@ -83,6 +117,8 @@ export function ContactSection() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
+                  required
                   rows={5}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -91,14 +127,26 @@ export function ContactSection() {
                 />
               </div>
 
-              {/* Submit Button (Optional - added for completeness) */}
-              <div className="pt-2">
+              {/* Submit Button */}
+              <div className="pt-2 flex flex-col gap-3">
                   <button
                     type="submit"
-                    className="bg-[#0085FF] hover:bg-[#006bb3] text-white font-medium px-8 py-3 rounded-lg transition-colors w-full sm:w-auto"
+                    disabled={loading}
+                    className="bg-[#0085FF] hover:bg-[#006bb3] text-white font-medium px-8 py-3 rounded-lg transition-colors w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                   >
-                    Enviar mensagem
+                    {loading ? "Enviando..." : "Enviar mensagem"}
                   </button>
+
+                  {status === "success" && (
+                    <p className="text-green-400 text-sm">
+                      ✓ Mensagem enviada com sucesso! Entraremos em contato em breve.
+                    </p>
+                  )}
+                  {status === "error" && (
+                    <p className="text-red-400 text-sm">
+                      ✗ Ocorreu um erro ao enviar. Por favor, tente novamente ou contate-nos diretamente.
+                    </p>
+                  )}
               </div>
             </form>
           </div>

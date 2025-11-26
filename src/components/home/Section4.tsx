@@ -186,7 +186,7 @@ export function Section4() {
                     fontWeight: 500
                   }}
                 >
-                  Saiba mais
+                  Conhecer o curso
                   <ArrowUpRight className="w-5 h-5" />
                 </Link>
                </div>
