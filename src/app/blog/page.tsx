@@ -2,6 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { Newspaper } from "lucide-react";
 import { getAllPosts } from "@/lib/sanity.queries";
+import { BlogPost } from "@/lib/sanity.types";
 
 export const revalidate = 60; // Revalidar a cada 60 segundos (ISR)
 
@@ -44,7 +45,7 @@ export default async function BlogPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post) => (
+              {posts.map((post: BlogPost) => (
                 <BlogCard key={post._id} post={post} />
               ))}
             </div>
