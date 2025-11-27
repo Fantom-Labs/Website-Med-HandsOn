@@ -1,5 +1,4 @@
 import { createClient } from 'next-sanity'
-import createImageUrlBuilder from '@sanity/image-url'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
 export const client = createClient({
@@ -9,6 +8,8 @@ export const client = createClient({
   useCdn: true, // `false` se você quer garantir dados fresh
 })
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { createImageUrlBuilder } = require('@sanity/image-url')
 const builder = createImageUrlBuilder(client)
 
 export function urlFor(source: SanityImageSource) {
