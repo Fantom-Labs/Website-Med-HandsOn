@@ -1,5 +1,7 @@
 import { createClient } from 'next-sanity'
-import { SanityImageSource } from '@sanity/image-url/lib/types/types'
+
+// Tipo para imagem do Sanity (pode ser vários formatos)
+type SanityImageSource = any
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const sanityImage = require('@sanity/image-url')
