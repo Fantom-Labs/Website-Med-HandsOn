@@ -1,15 +1,15 @@
 'use client'
 
-import config from '../../../../sanity/sanity.config'
 import dynamic from 'next/dynamic'
 
-// Carrega o Studio apenas no cliente (SSR: false) para evitar erros de build
-// como "Module not found: Can't resolve 'sanity/router'"
-const NextStudio = dynamic(
-  () => import('next-sanity/studio').then((mod) => mod.NextStudio),
-  { ssr: false }
-)
+// Importa o componente do Studio dinamicamente e desabilita SSR completamente.
+// Isso impede que dependências exclusivas do Studio (como sanity/router ou @sanity/vision)
+// sejam processadas pelo build do servidor, o que causa falhas na Netlify.
+const Studio = dynamic(() => import('@/components/studio/Studio'), {
+  ssr: false,
+  loading: () => <div>Carregando Studio...</div>
+})
 
 export default function StudioPage() {
-  return <NextStudio config={config} />
+  return <Studio />
 }
