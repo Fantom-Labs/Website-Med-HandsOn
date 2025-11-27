@@ -38,7 +38,7 @@ export async function getPostBySlug(slug: string) {
 }
 
 // Query para buscar slugs de todos os posts (para generateStaticParams)
-export async function getAllPostSlugs() {
+export async function getAllPostSlugs(): Promise<{ slug: string }[]> {
   return client.fetch(
     groq`*[_type == "post"]{ "slug": slug.current }`
   )
