@@ -1,11 +1,13 @@
-"use client";
-
 import { Header } from "@/components/layout/Header";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { Newspaper } from "lucide-react";
-import { blogPosts } from "@/lib/blog-data";
+import { getAllPosts } from "@/lib/sanity.queries";
 
-export default function BlogPage() {
+export const revalidate = 60; // Revalidar a cada 60 segundos (ISR)
+
+export default async function BlogPage() {
+  const posts = await getAllPosts();
+
   return (
     <main className="bg-[#EDF2FD] min-h-screen">
       <Header />
@@ -31,18 +33,22 @@ export default function BlogPage() {
       {/* Blog List Section */}
       <section className="py-16 md:py-24 px-4 md:px-6">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
-              <BlogCard key={post.slug} post={post} />
-            ))}
-          </div>
-
-          {/* Load More (Optional) */}
-          <div className="mt-16 flex justify-center">
-            <button className="px-8 py-4 bg-transparent border border-[#0085FF] text-[#0085FF] hover:bg-[#0085FF] hover:text-white rounded-lg font-medium transition-all duration-300">
-              Carregar mais artigos
-            </button>
-          </div>
+          {posts.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-gray-500 text-lg mb-4">
+                Nenhum post publicado ainda.
+              </p>
+              <p className="text-gray-400">
+                Acesse <span className="font-mono text-[#0085FF]">/studio</span> para criar seu primeiro post!
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {posts.map((post) => (
+                <BlogCard key={post._id} post={post} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </main>
