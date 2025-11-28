@@ -52,7 +52,7 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-6" style={{ fontFamily: 'var(--font-open-sans), sans-serif' }}>Contato</h3>
             <ul className="space-y-4">
               <li className="text-gray-400 text-sm">
-                contato@medhandson.com.br
+                medhandson.br@gmail.com
               </li>
               <li className="text-gray-400 text-sm">
                 +55 (11) 99999-9999

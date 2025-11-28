@@ -26,35 +26,8 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    "name": "Med HandsOn",
-    "url": "https://medhandson.com.br",
-    "logo": "https://medhandson.com.br/logo-footer.svg",
-    "description": "A única escola médica no Brasil onde o aluno aprende dentro de cirurgias reais.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Recife",
-      "addressRegion": "PE",
-      "addressCountry": "BR"
-    },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+55-11-99999-9999",
-      "contactType": "customer service"
-    },
-    "sameAs": [
-      "https://www.instagram.com/medhandson"
-    ]
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <Header />
       <HeroSection />
       <DiferenciaisSection />
