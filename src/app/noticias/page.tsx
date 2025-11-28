@@ -3,14 +3,40 @@ import { BlogCard } from "@/components/blog/BlogCard";
 import { Newspaper } from "lucide-react";
 import { getAllPosts } from "@/lib/sanity.queries";
 import { BlogPost } from "@/lib/sanity.types";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Notícias e Artigos Médicos | Med HandsOn",
+  description: "Fique por dentro das novidades da medicina, cirurgias ao vivo e artigos científicos selecionados pela equipe Med HandsOn.",
+};
 
 export const revalidate = 60; // Revalidar a cada 60 segundos (ISR)
 
 export default async function BlogPage() {
   const posts = await getAllPosts();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://medhandson.com.br"
+    }, {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notícias",
+      "item": "https://medhandson.com.br/noticias"
+    }]
+  };
+
   return (
     <main className="bg-[#EDF2FD] min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
       
       {/* Hero Section Simples */}

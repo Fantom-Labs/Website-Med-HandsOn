@@ -7,6 +7,7 @@ export async function getAllPosts() {
   return client.fetch(
     groq`*[_type == "post"] | order(publishedAt desc) {
       _id,
+      _updatedAt,
       title,
       "slug": slug.current,
       excerpt,
@@ -52,6 +53,7 @@ export async function getAllCourses(): Promise<Course[]> {
   return client.fetch(
     groq`*[_type == "course"] | order(_createdAt desc) {
       _id,
+      _updatedAt,
       title,
       "slug": slug.current,
       mainImage,

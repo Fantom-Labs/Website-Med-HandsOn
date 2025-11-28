@@ -10,11 +10,15 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Med HandsOn",
-  description: "A única escola médica no Brasil onde o aluno aprende dentro de cirurgias reais.",
+  title: {
+    default: "Med HandsOn | Escola Médica com Prática em Cirurgias Reais",
+    template: "%s | Med HandsOn",
+  },
+  description: "Med HandsOn: A única escola médica no Brasil onde você aprende operando em cirurgias reais. Cursos de especialização com prática intensiva.",
+  keywords: ["cursos médicos", "cirurgia plástica", "prática cirúrgica", "fellowship", "medicina", "especialização médica"],
   openGraph: {
-    title: "Med HandsOn",
-    description: "A única escola médica no Brasil onde o aluno aprende dentro de cirurgias reais.",
+    title: "Med HandsOn | Escola Médica com Prática em Cirurgias Reais",
+    description: "Med HandsOn: A única escola médica no Brasil onde você aprende operando em cirurgias reais. Cursos de especialização com prática intensiva.",
     url: "https://medhandson.com.br",
     siteName: "Med HandsOn",
     images: [

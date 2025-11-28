@@ -5,8 +5,8 @@ import { getAllCourses } from "@/lib/sanity.queries";
 import { urlFor } from "@/lib/sanity.client";
 
 export const metadata: Metadata = {
-  title: "Cursos | Med HandsOn",
-  description: "Conheça nossos cursos de especialização médica com prática HandsOn.",
+  title: "Cursos e Especializações Médicas | Med HandsOn",
+  description: "Confira nossos cursos de especialização em medicina e cirurgia. Aprenda com prática HandsOn em procedimentos reais.",
 };
 
 export const revalidate = 60; // Revalidar a cada 60 segundos
@@ -15,6 +15,22 @@ const staticCourses: any[] = [];
 
 export default async function CursosPage() {
   const sanityCourses = await getAllCourses();
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://medhandson.com.br"
+    }, {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Cursos",
+      "item": "https://medhandson.com.br/cursos"
+    }]
+  };
 
   const dynamicCourses = sanityCourses.map(course => {
     // Lógica para definir a imagem do card:
@@ -43,6 +59,10 @@ export default async function CursosPage() {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
       
       <div className="pt-[120px] pb-20 container mx-auto px-4 md:px-6">

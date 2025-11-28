@@ -2,6 +2,7 @@ import { PortableTextBlock } from '@portabletext/types'
 
 export interface BlogPost {
   _id: string
+  _updatedAt?: string
   title: string
   slug: string
   excerpt: string
@@ -27,6 +28,7 @@ export interface CourseInstructor {
 
 export interface Course {
   _id: string
+  _updatedAt?: string
   title: string
   slug: string
   mainImage: any

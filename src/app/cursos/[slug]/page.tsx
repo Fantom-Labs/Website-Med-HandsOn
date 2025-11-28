@@ -30,6 +30,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${course.title} | Med HandsOn`,
     description: course.shortDescription,
     openGraph: {
+      title: course.title,
+      description: course.shortDescription,
+      type: "website",
+      images: ogImage ? [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: course.title,
+        }
+      ] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: course.title,
+      description: course.shortDescription,
       images: ogImage ? [ogImage] : [],
     },
   };
@@ -53,8 +69,62 @@ export default async function CoursePage({ params }: PageProps) {
     notFound();
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": course.title,
+    "description": course.shortDescription,
+    "provider": {
+      "@type": "Organization",
+      "name": "Med HandsOn",
+      "sameAs": "https://medhandson.com.br"
+    },
+    "offers": course.price ? {
+      "@type": "Offer",
+      "price": course.price,
+      "priceCurrency": "BRL",
+      "availability": "https://schema.org/InStock",
+      "url": `https://medhandson.com.br/cursos/${course.slug}`
+    } : undefined,
+    "hasCourseInstance": {
+      "@type": "CourseInstance",
+      "courseMode": course.location?.toLowerCase().includes("online") ? "online" : "onsite",
+      "location": course.location,
+      "startDate": course.startDate,
+    }
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://medhandson.com.br"
+    }, {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Cursos",
+      "item": "https://medhandson.com.br/cursos"
+    }, {
+      "@type": "ListItem",
+      "position": 3,
+      "name": course.title,
+      "item": `https://medhandson.com.br/cursos/${course.slug}`
+    }]
+  };
+
   return (
     <main className="min-h-screen bg-gray-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Header />
       
       <div className="pt-[80px]">

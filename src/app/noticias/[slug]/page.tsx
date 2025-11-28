@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { getPostBySlug, getAllPostSlugs } from "@/lib/sanity.queries";
 import { notFound } from "next/navigation";
@@ -13,6 +14,39 @@ interface BlogPostPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+// Generate Metadata
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+
+  if (!post) {
+    return {
+      title: "Notícia não encontrada",
+    };
+  }
+
+  const ogImage = post.coverImage ? urlFor(post.coverImage).width(1200).height(630).url() : undefined;
+
+  return {
+    title: `${post.title} | Med HandsOn Blog`,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      publishedTime: post.publishedAt,
+      authors: ["Med HandsOn"],
+      images: ogImage ? [ogImage] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: ogImage ? [ogImage] : [],
+    },
+  };
 }
 
 export async function generateStaticParams() {
@@ -36,8 +70,33 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     locale: ptBR,
   });
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "image": post.coverImage ? urlFor(post.coverImage).width(1200).height(630).url() : undefined,
+    "datePublished": post.publishedAt,
+    "author": {
+      "@type": "Organization",
+      "name": "Med HandsOn"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Med HandsOn",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://medhandson.com.br/logo-footer.svg"
+      }
+    },
+    "description": post.excerpt
+  };
+
   return (
     <main className="bg-[#EDF2FD] min-h-screen pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
       
       {/* Article Header */}
