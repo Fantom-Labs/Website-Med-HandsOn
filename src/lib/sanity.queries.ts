@@ -62,6 +62,7 @@ export async function getAllCourses(): Promise<Course[]> {
       location,
       price,
       installments,
+      mentalTrigger,
       features
     }`
   )
@@ -82,6 +83,7 @@ export async function getCourseBySlug(slug: string): Promise<Course> {
       location,
       price,
       installments,
+      mentalTrigger,
       enrollmentLink,
       instructor,
       features,

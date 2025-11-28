@@ -107,7 +107,7 @@ export default async function CoursePage({ params }: PageProps) {
                 {/* Price Card */}
                 <div className="mt-6 bg-primary-50 p-6 rounded-xl border border-primary-100">
                   <h4 className="font-bold text-primary-900 mb-2">Próxima Turma</h4>
-                  <p className="text-primary-700 mb-4">Vagas limitadas.</p>
+                  <p className="text-primary-700 mb-4">{course.mentalTrigger || "Vagas limitadas."}</p>
                   
                   {(course.price !== undefined && course.price !== null) ? (
                     <div className="mb-6">

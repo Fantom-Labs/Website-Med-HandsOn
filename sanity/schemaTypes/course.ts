@@ -80,6 +80,13 @@ export default defineType({
       placeholder: 'ex: ou 12x de R$ 599,70',
     }),
     defineField({
+      name: 'mentalTrigger',
+      title: 'Gatilho Mental (Urgência)',
+      type: 'string',
+      description: 'Texto que aparece acima do preço (ex: "Vagas limitadas.", "Última turma de 2024!", "Apenas 5 vagas!")',
+      placeholder: 'ex: Vagas limitadas.',
+    }),
+    defineField({
       name: 'enrollmentLink',
       title: 'Link de Inscrição (Botão)',
       type: 'url',

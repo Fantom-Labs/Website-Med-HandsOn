@@ -67,7 +67,7 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-6" style={{ fontFamily: 'var(--font-open-sans), sans-serif' }}>Redes Sociais</h3>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#077DEA] transition-colors">
+              <a href="https://www.instagram.com/medhandson" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#077DEA] transition-colors">
                 <Instagram size={20} />
               </a>
               <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#077DEA] transition-colors">

@@ -38,6 +38,7 @@ export interface Course {
   location?: string
   price?: number
   installments?: string
+  mentalTrigger?: string // Gatilho mental de urgência
   enrollmentLink?: string
   instructor?: CourseInstructor
   features?: string[]
