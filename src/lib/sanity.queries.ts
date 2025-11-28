@@ -1,9 +1,9 @@
 import { groq } from 'next-sanity'
 import { client } from './sanity.client'
-import { Course } from './sanity.types'
+import { Course, BlogPost } from './sanity.types'
 
 // Query para buscar todos os posts
-export async function getAllPosts() {
+export async function getAllPosts(): Promise<BlogPost[]> {
   return client.fetch(
     groq`*[_type == "post"] | order(publishedAt desc) {
       _id,
@@ -21,7 +21,7 @@ export async function getAllPosts() {
 }
 
 // Query para buscar um post específico pelo slug
-export async function getPostBySlug(slug: string) {
+export async function getPostBySlug(slug: string): Promise<BlogPost> {
   return client.fetch(
     groq`*[_type == "post" && slug.current == $slug][0] {
       _id,
