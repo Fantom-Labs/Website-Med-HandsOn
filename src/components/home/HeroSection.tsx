@@ -32,9 +32,9 @@ export function HeroSection() {
         href="https://wa.me/5511999999999" // Substituir pelo número real
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed left-8 bottom-8 z-50 w-14 h-14 bg-[#1F1F1F] hover:bg-[#292929] rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 border border-white/10"
+        className="fixed right-8 bottom-8 z-50 w-16 h-16 bg-[#1F1F1F] hover:bg-[#292929] rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 border border-white/10"
       >
-        <img src="/zapzap.svg" alt="WhatsApp" className="w-8 h-8" />
+        <img src="/zapzap.svg" alt="WhatsApp" className="w-[50px] h-[50px]" />
       </a>
 
       <div className="container mx-auto px-4 md:px-6 relative z-20">
