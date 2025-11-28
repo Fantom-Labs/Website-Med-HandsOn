@@ -43,11 +43,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       {/* Article Header */}
       <article className="container mx-auto px-4 md:px-6 pt-32 md:pt-40">
         <Link 
-          href="/blog"
+          href="/noticias"
           className="inline-flex items-center text-[#0056b3] hover:text-[#0085FF] mb-8 font-medium transition-colors"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Voltar para o blog
+          Voltar para notícias
         </Link>
 
         <div className="max-w-4xl mx-auto">

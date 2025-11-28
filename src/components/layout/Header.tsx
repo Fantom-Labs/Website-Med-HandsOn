@@ -30,8 +30,8 @@ export function Header() {
             <Link href="/" className="font-semibold transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
               Home
             </Link>
-            <Link href="/blog" className="font-semibold transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
-              Blog
+            <Link href="/noticias" className="font-semibold transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
+              Notícias
             </Link>
             <Link href="/quem-somos" className="font-semibold transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
               Quem Somos
@@ -110,12 +110,12 @@ export function Header() {
                 Home
               </Link>
               <Link 
-                href="/blog" 
+                href="/noticias" 
                 className="block font-medium text-lg hover:text-primary-600"
                 style={{ color: '#252525', fontFamily: 'var(--font-open-sans), sans-serif' }}
                 onClick={() => setIsMenuOpen(false)}
               >
-                Blog
+                Notícias
               </Link>
               <Link 
                 href="/quem-somos" 

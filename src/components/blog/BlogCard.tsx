@@ -17,7 +17,7 @@ export function BlogCard({ post }: BlogCardProps) {
 
   return (
     <Link 
-      href={`/blog/${post.slug}`}
+      href={`/noticias/${post.slug}`}
       className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full"
     >
       {/* Image Container */}

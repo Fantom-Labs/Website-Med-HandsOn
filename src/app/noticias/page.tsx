@@ -26,7 +26,7 @@ export default async function BlogPage() {
              }}
            >
              <Newspaper className="w-4 h-4 text-[#0085FF]" />
-             <span style={{ fontFamily: 'var(--font-open-sans), sans-serif', fontSize: '18px' }}>Blog & Notícias</span>
+             <span style={{ fontFamily: 'var(--font-open-sans), sans-serif', fontSize: '18px' }}>Notícias</span>
            </div>
         </div>
       </section>
@@ -55,3 +55,4 @@ export default async function BlogPage() {
     </main>
   );
 }
+
