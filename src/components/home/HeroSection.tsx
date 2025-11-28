@@ -45,7 +45,7 @@ export function HeroSection() {
             Domine as habilidades necessárias para realizar a Rinoplastia com pacientes reais.
           </p>
           <Link 
-            href="/cursos/rinoplastia-ultrassonica" 
+            href="/cursos/rinoplastia-avancada" 
             className="flex items-center justify-between w-full bg-white/10 hover:bg-white/20 border border-white/10 rounded-lg px-6 py-4 transition-all group max-w-[300px]"
           >
             <span className="font-medium text-white">Conhecer o curso</span>
