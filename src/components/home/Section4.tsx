@@ -11,6 +11,7 @@ const courses = [
     title: "Formação em Rinoplastia Ultrassônica Avançada",
     description: "Domine as habilidades necessárias para realizar Rinoplastia com formação completa com pacientes reais.",
     image: "/images/img-rp.png",
+    link: "/cursos/rinoplastia-avancada",
     features: [
       { icon: "/VIDEO.svg", text: "Aulas gravadas" },
       { icon: "/PRATICA.svg", text: "Aulas práticas" },
@@ -175,7 +176,7 @@ export function Section4() {
 
                 {/* Button */}
                 <Link
-                  href="/cursos/rinoplastia-ultrassonica"
+                  href={courses[currentSlide].link || "/cursos"}
                   className="inline-flex items-center justify-center gap-2 text-white w-full md:w-fit"
                   style={{
                     background: 'linear-gradient(180deg, #0085FF 0%, #00488A 100%)',
@@ -196,4 +197,3 @@ export function Section4() {
      </section>
   );
 }
-

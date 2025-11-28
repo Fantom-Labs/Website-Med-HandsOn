@@ -1,15 +1,20 @@
 import { Header } from "@/components/layout/Header";
 import { CourseCard } from "@/components/cursos/CourseCard";
 import { Metadata } from "next";
+import { getAllCourses } from "@/lib/sanity.queries";
+import { urlFor } from "@/lib/sanity.client";
 
 export const metadata: Metadata = {
   title: "Cursos | Med HandsOn",
   description: "Conheça nossos cursos de especialização médica com prática HandsOn.",
 };
 
-const courses = [
+export const revalidate = 60; // Revalidar a cada 60 segundos
+
+const staticCourses = [
+  /*
   {
-    id: 1,
+    id: "static-1",
     title: "Formação em Rinoplastia Ultrassônica Avançada",
     description: "Domine as habilidades necessárias para realizar Rinoplastia com formação completa com pacientes reais.",
     image: "/images/img-rp.png",
@@ -21,9 +26,37 @@ const courses = [
       { icon: "/PROFILE.svg", text: "Dr. Gustavo Motta" }
     ]
   }
+  */
 ];
 
-export default function CursosPage() {
+export default async function CursosPage() {
+  const sanityCourses = await getAllCourses();
+
+  const dynamicCourses = sanityCourses.map(course => {
+    // Lógica para definir a imagem do card:
+    // 1. Tenta usar cardImage
+    // 2. Se não existir, tenta usar mainImage
+    // 3. Se não existir, usa placeholder
+    let imageUrl = "/images/hero-img.png";
+    
+    if (course.cardImage && urlFor(course.cardImage)) {
+      imageUrl = urlFor(course.cardImage)?.url() || "";
+    } else if (course.mainImage && urlFor(course.mainImage)) {
+      imageUrl = urlFor(course.mainImage)?.url() || "";
+    }
+
+    return {
+      id: course._id,
+      title: course.title,
+      description: course.shortDescription,
+      image: imageUrl,
+      link: `/cursos/${course.slug}`,
+      features: course.features || []
+    };
+  });
+
+  const courses = [...staticCourses, ...dynamicCourses];
+
   return (
     <main className="min-h-screen bg-gray-50">
       <Header />

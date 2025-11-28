@@ -10,9 +10,10 @@ interface CourseHeroProps {
   imageSrc?: string;
   mobileImageSrc?: string;
   mobileBgColor?: string;
+  enrollmentLink?: string;
 }
 
-export function CourseHero({ title, description, startDate, duration, location, imageSrc, mobileImageSrc, mobileBgColor }: CourseHeroProps) {
+export function CourseHero({ title, description, startDate, duration, location, imageSrc, mobileImageSrc, mobileBgColor, enrollmentLink }: CourseHeroProps) {
   return (
     <section className="relative text-white py-12 md:py-24 overflow-hidden bg-[#09111F]" style={{ backgroundColor: mobileBgColor ? undefined : '#09111F' }}>
       {/* Background Image - Mobile Override */}
@@ -77,14 +78,26 @@ export function CourseHero({ title, description, startDate, duration, location, 
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="bg-white text-primary-900 hover:bg-primary-50 cursor-pointer border-0">
-              Inscrever-se agora
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+            {enrollmentLink ? (
+              <a 
+                href={enrollmentLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block"
+              >
+                <Button size="lg" className="bg-white text-primary-900 hover:bg-primary-50 cursor-pointer border-0 w-full sm:w-auto">
+                  Inscrever-se agora
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </a>
+            ) : (
+              <Button size="lg" disabled className="bg-white/50 text-primary-900 cursor-not-allowed border-0 opacity-70">
+                Inscrições em breve
+              </Button>
+            )}
           </div>
         </div>
       </div>
     </section>
   );
 }
-

@@ -1,3 +1,10 @@
+export default function RinoplastiaPage() {
+  // Redirecionamento temporário ou página desativada
+  return null; // Ou redirecionar via next.config.js ou middleware se preferir
+}
+
+/*
+// CÓDIGO ANTIGO PRESERVADO PARA REFERÊNCIA
 import { Header } from "@/components/layout/Header";
 import { CourseHero } from "@/components/cursos/CourseHero";
 import { CourseFeatures } from "@/components/cursos/CourseFeatures";
@@ -22,7 +29,6 @@ export default function RinoplastiaPage() {
   return (
     <main className="min-h-screen bg-gray-50">
       <Header />
-      {/* Add margin top to account for fixed header */}
       <div className="pt-[80px]">
         <CourseHero
           title="Formação em Rinoplastia Ultrassônica Avançada"
@@ -115,3 +121,4 @@ export default function RinoplastiaPage() {
     </main>
   );
 }
+*/

@@ -1,5 +1,6 @@
 import { groq } from 'next-sanity'
 import { client } from './sanity.client'
+import { Course } from './sanity.types'
 
 // Query para buscar todos os posts
 export async function getAllPosts() {
@@ -44,3 +45,55 @@ export async function getAllPostSlugs(): Promise<{ slug: string }[]> {
   )
 }
 
+// --- CURSOS ---
+
+// Query para buscar todos os cursos (para a listagem)
+export async function getAllCourses(): Promise<Course[]> {
+  return client.fetch(
+    groq`*[_type == "course"] | order(_createdAt desc) {
+      _id,
+      title,
+      "slug": slug.current,
+      mainImage,
+      cardImage,
+      shortDescription,
+      startDate,
+      duration,
+      location,
+      price,
+      installments,
+      features
+    }`
+  )
+}
+
+// Query para buscar um curso específico pelo slug
+export async function getCourseBySlug(slug: string): Promise<Course> {
+  return client.fetch(
+    groq`*[_type == "course" && slug.current == $slug][0] {
+      _id,
+      title,
+      "slug": slug.current,
+      mainImage,
+      shortDescription,
+      fullDescription,
+      startDate,
+      duration,
+      location,
+      price,
+      installments,
+      enrollmentLink,
+      instructor,
+      features,
+      modules
+    }`,
+    { slug }
+  )
+}
+
+// Query para buscar slugs de todos os cursos
+export async function getAllCourseSlugs(): Promise<{ slug: string }[]> {
+  return client.fetch(
+    groq`*[_type == "course"]{ "slug": slug.current }`
+  )
+}

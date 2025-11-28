@@ -1,0 +1,147 @@
+import { defineField, defineType } from 'sanity'
+
+export default defineType({
+  name: 'course',
+  title: 'Cursos',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'title',
+      title: 'Título do Curso',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug (URL do curso)',
+      type: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'mainImage',
+      title: 'Imagem de Capa (Hero)',
+      type: 'image',
+      description: 'Imagem que aparece no topo da página do curso',
+      options: { hotspot: true },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'cardImage',
+      title: 'Imagem do Card (Listagem)',
+      type: 'image',
+      description: 'Imagem que aparece na lista de cursos (/cursos). Se não preencher, usa a imagem de capa.',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'shortDescription',
+      title: 'Descrição Curta (para o Card)',
+      type: 'text',
+      rows: 3,
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'fullDescription',
+      title: 'Descrição Completa (Sobre o Curso)',
+      type: 'array',
+      of: [{ type: 'block' }],
+    }),
+    // Informações básicas
+    defineField({
+      name: 'startDate',
+      title: 'Data de Início',
+      type: 'string',
+      placeholder: 'ex: Em breve, ou 20 de Outubro',
+    }),
+    defineField({
+      name: 'duration',
+      title: 'Duração',
+      type: 'string',
+      placeholder: 'ex: 4 semanas',
+    }),
+    defineField({
+      name: 'location',
+      title: 'Localização',
+      type: 'string',
+      placeholder: 'ex: Recife, PE',
+    }),
+    defineField({
+      name: 'price',
+      title: 'Preço (em R$)',
+      type: 'number',
+    }),
+    defineField({
+      name: 'installments',
+      title: 'Parcelamento (Texto)',
+      type: 'string',
+      placeholder: 'ex: ou 12x de R$ 599,70',
+    }),
+    defineField({
+      name: 'enrollmentLink',
+      title: 'Link de Inscrição (Botão)',
+      type: 'url',
+      description: 'Link externo para pagamento ou formulário (ex: Hotmart, Eduzz, WhatsApp)',
+      validation: (rule) => rule.uri({ scheme: ['http', 'https', 'mailto', 'tel'] }),
+    }),
+
+    // Instrutor (Inline)
+    defineField({
+      name: 'instructor',
+      title: 'Instrutor',
+      type: 'object',
+      fields: [
+        defineField({ name: 'name', title: 'Nome', type: 'string' }),
+        defineField({ name: 'role', title: 'Cargo/Especialidade', type: 'string' }),
+        defineField({ name: 'bio', title: 'Biografia Curta', type: 'text', rows: 3 }),
+        defineField({ name: 'image', title: 'Foto do Instrutor', type: 'image', options: { hotspot: true } }),
+      ],
+    }),
+
+    // Diferenciais (Lista de texto)
+    defineField({
+      name: 'features',
+      title: 'Diferenciais do Curso',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        layout: 'tags',
+      },
+    }),
+
+    // Conteúdo Programático (Módulos flexíveis)
+    defineField({
+      name: 'modules',
+      title: 'Conteúdo Programático',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          title: 'Módulo',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Título do Módulo',
+              type: 'string',
+              placeholder: 'ex: Módulo Teórico',
+            }),
+            defineField({
+              name: 'topics',
+              title: 'Tópicos',
+              type: 'array',
+              of: [{ type: 'string' }],
+            }),
+          ],
+        },
+      ],
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      media: 'mainImage',
+    },
+  },
+})
