@@ -73,7 +73,7 @@ export function Footer() {
               <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#077DEA] transition-colors">
                 <Linkedin size={20} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#077DEA] transition-colors">
+              <a href="https://www.youtube.com/@MedHandsOn" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#077DEA] transition-colors">
                 <Youtube size={20} />
               </a>
             </div>

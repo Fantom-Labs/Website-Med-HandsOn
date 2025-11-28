@@ -16,6 +16,19 @@ interface BlogPostPageProps {
   }>;
 }
 
+// Helper function to convert Portable Text to plain text
+function portableTextToPlainText(blocks: any[] = []) {
+  if (!blocks) return '';
+  return blocks
+    .map(block => {
+      if (block._type !== 'block' || !block.children) {
+        return ''
+      }
+      return block.children.map((child: any) => child.text).join('')
+    })
+    .join('\n\n')
+}
+
 // Generate Metadata
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
@@ -28,13 +41,17 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   const ogImage = post.coverImage ? urlFor(post.coverImage).width(1200).height(630).url() : undefined;
+  
+  // Fallback description if excerpt is missing
+  const plainTextContent = portableTextToPlainText(post.content);
+  const description = post.excerpt || (plainTextContent.length > 160 ? plainTextContent.substring(0, 157) + '...' : plainTextContent);
 
   return {
     title: `${post.title} | Med HandsOn Blog`,
-    description: post.excerpt,
+    description: description,
     openGraph: {
       title: post.title,
-      description: post.excerpt,
+      description: description,
       type: "article",
       publishedTime: post.publishedAt,
       authors: ["Med HandsOn"],
@@ -43,7 +60,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     twitter: {
       card: "summary_large_image",
       title: post.title,
-      description: post.excerpt,
+      description: description,
       images: ogImage ? [ogImage] : [],
     },
   };
@@ -70,6 +87,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     locale: ptBR,
   });
 
+  // Fallback description for JSON-LD
+  const plainTextContent = portableTextToPlainText(post.content);
+  const description = post.excerpt || (plainTextContent.length > 160 ? plainTextContent.substring(0, 157) + '...' : plainTextContent);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -88,7 +109,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         "url": "https://medhandson.com.br/logo-footer.svg"
       }
     },
-    "description": post.excerpt
+    "description": description
   };
 
   return (
@@ -148,5 +169,3 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </main>
   );
 }
-
-
