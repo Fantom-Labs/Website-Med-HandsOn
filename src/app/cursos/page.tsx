@@ -11,23 +11,7 @@ export const metadata: Metadata = {
 
 export const revalidate = 60; // Revalidar a cada 60 segundos
 
-const staticCourses = [
-  /*
-  {
-    id: "static-1",
-    title: "Formação em Rinoplastia Ultrassônica Avançada",
-    description: "Domine as habilidades necessárias para realizar Rinoplastia com formação completa com pacientes reais.",
-    image: "/images/img-rp.png",
-    link: "/cursos/rinoplastia-ultrassonica",
-    features: [
-      { icon: "/VIDEO.svg", text: "Aulas gravadas" },
-      { icon: "/PRATICA.svg", text: "Aulas práticas" },
-      { icon: "/INJEÇÃO.svg", text: "Participe de cirurgias" },
-      { icon: "/PROFILE.svg", text: "Dr. Gustavo Motta" }
-    ]
-  }
-  */
-];
+const staticCourses: any[] = [];
 
 export default async function CursosPage() {
   const sanityCourses = await getAllCourses();
