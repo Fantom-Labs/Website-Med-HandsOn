@@ -1,5 +1,12 @@
 import { PortableTextBlock } from '@portabletext/types'
 
+export interface Author {
+  name: string
+  role: string
+  bio?: string
+  image?: any
+}
+
 export interface BlogPost {
   _id: string
   _updatedAt?: string
@@ -12,6 +19,11 @@ export interface BlogPost {
   publishedAt: string
   content: PortableTextBlock[]
   featured?: boolean
+  // Campos de SEO
+  seoTitle?: string
+  seoDescription?: string
+  keywords?: string[]
+  author?: Author
 }
 
 export interface CourseModule {
@@ -45,4 +57,8 @@ export interface Course {
   instructor?: CourseInstructor
   features?: string[]
   modules?: CourseModule[]
+  // Campos de SEO
+  seoTitle?: string
+  seoDescription?: string
+  keywords?: string[]
 }

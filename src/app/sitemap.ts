@@ -6,16 +6,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Static routes
   const routes = [
-    '',
-    '/cursos',
-    '/noticias',
-    '/quem-somos',
-    '/termos',
-  ].map((route) => ({
+    { route: '', priority: 1, changeFrequency: 'weekly' as const },
+    { route: '/cursos', priority: 0.9, changeFrequency: 'weekly' as const },
+    { route: '/noticias', priority: 0.9, changeFrequency: 'daily' as const },
+    { route: '/quem-somos', priority: 0.8, changeFrequency: 'monthly' as const },
+    { route: '/termos', priority: 0.5, changeFrequency: 'yearly' as const },
+  ].map(({ route, priority, changeFrequency }) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString(),
-    changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1 : 0.8,
+    changeFrequency,
+    priority,
   }))
 
   // Dynamic routes - Courses
@@ -27,13 +27,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.9,
   }))
 
-  // Dynamic routes - Posts
+  // Dynamic routes - Posts (posts em destaque têm prioridade maior)
   const posts = await getAllPosts()
   const postRoutes = posts.map((post) => ({
     url: `${baseUrl}/noticias/${post.slug}`,
-    lastModified: post._updatedAt || new Date().toISOString(),
+    lastModified: post._updatedAt || post.publishedAt,
     changeFrequency: 'monthly' as const,
-    priority: 0.7,
+    priority: post.featured ? 0.85 : 0.7,
   }))
 
   return [...routes, ...courseRoutes, ...postRoutes]

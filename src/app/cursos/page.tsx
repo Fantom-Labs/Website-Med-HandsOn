@@ -7,6 +7,26 @@ import { urlFor } from "@/lib/sanity.client";
 export const metadata: Metadata = {
   title: "Cursos e Especializações Médicas | Med HandsOn",
   description: "Confira nossos cursos de especialização em medicina e cirurgia. Aprenda com prática HandsOn em procedimentos reais.",
+  keywords: [
+    "cursos médicos",
+    "especialização médica",
+    "curso cirurgia plástica",
+    "fellowship medicina",
+    "rinoplastia ultrassônica",
+    "prática cirúrgica",
+    "hands on medicina",
+    "curso rinoplastia",
+    "formação médica",
+  ],
+  alternates: {
+    canonical: "https://medhandson.com.br/cursos",
+  },
+  openGraph: {
+    title: "Cursos e Especializações Médicas | Med HandsOn",
+    description: "Confira nossos cursos de especialização em medicina e cirurgia. Aprenda com prática HandsOn em procedimentos reais.",
+    url: "https://medhandson.com.br/cursos",
+    type: "website",
+  },
 };
 
 export const revalidate = 60; // Revalidar a cada 60 segundos

@@ -42,26 +42,42 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
   const ogImage = post.coverImage ? urlFor(post.coverImage).width(1200).height(630).url() : undefined;
   
-  // Fallback description if excerpt is missing
+  // Usar seoDescription se existir, senão excerpt, senão extrato do conteúdo
   const plainTextContent = portableTextToPlainText(post.content);
-  const description = post.excerpt || (plainTextContent.length > 160 ? plainTextContent.substring(0, 157) + '...' : plainTextContent);
+  const description = post.seoDescription || post.excerpt || (plainTextContent.length > 160 ? plainTextContent.substring(0, 157) + '...' : plainTextContent);
+  
+  // Usar seoTitle se existir, senão title
+  const title = post.seoTitle || post.title;
 
   return {
-    title: `${post.title} | Med HandsOn Blog`,
+    title: `${title} | Med HandsOn Blog`,
     description: description,
+    keywords: post.keywords || [],
+    alternates: {
+      canonical: `https://medhandson.com.br/noticias/${slug}`,
+    },
     openGraph: {
-      title: post.title,
+      title: title,
       description: description,
       type: "article",
       publishedTime: post.publishedAt,
-      authors: ["Med HandsOn"],
-      images: ogImage ? [ogImage] : [],
+      modifiedTime: post._updatedAt || post.publishedAt,
+      authors: post.author ? [post.author.name] : ["Med HandsOn"],
+      tags: post.keywords || [],
+      images: ogImage ? [{
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: title,
+      }] : [],
+      url: `https://medhandson.com.br/noticias/${slug}`,
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
+      title: title,
       description: description,
       images: ogImage ? [ogImage] : [],
+      creator: "@medhandson",
     },
   };
 }
@@ -89,27 +105,59 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   // Fallback description for JSON-LD
   const plainTextContent = portableTextToPlainText(post.content);
-  const description = post.excerpt || (plainTextContent.length > 160 ? plainTextContent.substring(0, 157) + '...' : plainTextContent);
+  const description = post.seoDescription || post.excerpt || (plainTextContent.length > 160 ? plainTextContent.substring(0, 157) + '...' : plainTextContent);
+  const title = post.seoTitle || post.title;
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": post.title,
+    "headline": title,
     "image": post.coverImage ? urlFor(post.coverImage).width(1200).height(630).url() : undefined,
     "datePublished": post.publishedAt,
+    "dateModified": post._updatedAt || post.publishedAt,
     "author": {
-      "@type": "Organization",
-      "name": "Med HandsOn"
+      "@type": post.author ? "Person" : "Organization",
+      "name": post.author?.name || "Med HandsOn",
+      ...(post.author?.role && { "jobTitle": post.author.role }),
+      ...(post.author?.image && { "image": urlFor(post.author.image).url() }),
     },
     "publisher": {
       "@type": "Organization",
       "name": "Med HandsOn",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://medhandson.com.br/logo-footer.svg"
+        "url": "https://medhandson.com.br/logo.svg"
       }
     },
-    "description": description
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://medhandson.com.br/noticias/${slug}`
+    },
+    "description": description,
+    ...(post.keywords && post.keywords.length > 0 && { "keywords": post.keywords.join(', ') }),
+    "articleSection": post.category,
+    "inLanguage": "pt-BR",
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://medhandson.com.br"
+    }, {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notícias",
+      "item": "https://medhandson.com.br/noticias"
+    }, {
+      "@type": "ListItem",
+      "position": 3,
+      "name": post.title,
+      "item": `https://medhandson.com.br/noticias/${slug}`
+    }]
   };
 
   return (
@@ -117,6 +165,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <Header />
       

@@ -15,7 +15,11 @@ export async function getAllPosts(): Promise<BlogPost[]> {
       category,
       readTime,
       publishedAt,
-      featured
+      featured,
+      seoTitle,
+      seoDescription,
+      keywords,
+      author
     }`
   )
 }
@@ -25,6 +29,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost> {
   return client.fetch(
     groq`*[_type == "post" && slug.current == $slug][0] {
       _id,
+      _updatedAt,
       title,
       "slug": slug.current,
       excerpt,
@@ -33,7 +38,11 @@ export async function getPostBySlug(slug: string): Promise<BlogPost> {
       readTime,
       publishedAt,
       content,
-      featured
+      featured,
+      seoTitle,
+      seoDescription,
+      keywords,
+      author
     }`,
     { slug }
   )
@@ -65,7 +74,10 @@ export async function getAllCourses(): Promise<Course[]> {
       price,
       installments,
       mentalTrigger,
-      features
+      features,
+      seoTitle,
+      seoDescription,
+      keywords
     }`
   )
 }
@@ -75,6 +87,7 @@ export async function getCourseBySlug(slug: string): Promise<Course> {
   return client.fetch(
     groq`*[_type == "course" && slug.current == $slug][0] {
       _id,
+      _updatedAt,
       title,
       "slug": slug.current,
       mainImage,
@@ -89,7 +102,10 @@ export async function getCourseBySlug(slug: string): Promise<Course> {
       enrollmentLink,
       instructor,
       features,
-      modules
+      modules,
+      seoTitle,
+      seoDescription,
+      keywords
     }`,
     { slug }
   )

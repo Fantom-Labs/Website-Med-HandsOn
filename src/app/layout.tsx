@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import OrganizationJsonLd from "@/components/seo/OrganizationJsonLd";
+import { GLOBAL_KEYWORDS } from "@/config/seo-keywords";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     template: "%s | Med HandsOn",
   },
   description: "Med HandsOn: A única escola médica no Brasil onde você aprende operando em cirurgias reais. Cursos de especialização com prática intensiva.",
-  keywords: ["cursos médicos", "cirurgia plástica", "prática cirúrgica", "fellowship", "medicina", "especialização médica", "rinoplastia ultrassônica", "medhandson", "ensino médico"],
+  keywords: GLOBAL_KEYWORDS,
   authors: [{ name: "Med HandsOn" }],
   creator: "Med HandsOn",
   publisher: "Med HandsOn",
@@ -28,6 +29,17 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   openGraph: {
     title: "Med HandsOn | Escola Médica com Prática em Cirurgias Reais",
@@ -49,10 +61,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Med HandsOn | Escola Médica com Prática em Cirurgias Reais",
     description: "A única escola médica no Brasil onde você aprende operando em cirurgias reais.",
-    images: ["/images/og-image.png"], // Reusing OG image for now
+    images: ["/images/og-image.png"],
+    creator: "@medhandson",
   },
   verification: {
-    google: "google-site-verification=SEU_CODIGO_AQUI", // TODO: Adicionar código do Search Console
+    google: "WgytqQNpUULFadVY1f5gBdiPpseo95-i15Y6EJebkY0",
   },
 };
 

@@ -130,6 +130,43 @@ export default defineType({
       initialValue: false,
       description: 'Marcar como post destacado na página inicial',
     }),
+    // Campos de SEO
+    defineField({
+      name: 'seoTitle',
+      title: 'Título SEO (Meta Title)',
+      type: 'string',
+      description: 'Título otimizado para motores de busca (50-60 caracteres). Se não preencher, usa o título do post.',
+      validation: (Rule) => Rule.max(60),
+    }),
+    defineField({
+      name: 'seoDescription',
+      title: 'Meta Description',
+      type: 'text',
+      description: 'Descrição para Google (150-160 caracteres). Se não preencher, usa o resumo.',
+      validation: (Rule) => Rule.max(160),
+      rows: 3,
+    }),
+    defineField({
+      name: 'keywords',
+      title: 'Palavras-chave (Keywords)',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Palavras-chave relacionadas ao post para SEO',
+      options: {
+        layout: 'tags',
+      },
+    }),
+    defineField({
+      name: 'author',
+      title: 'Autor',
+      type: 'object',
+      fields: [
+        { name: 'name', title: 'Nome', type: 'string' },
+        { name: 'role', title: 'Cargo/Especialidade', type: 'string' },
+        { name: 'bio', title: 'Biografia Curta', type: 'text', rows: 2 },
+        { name: 'image', title: 'Foto do Autor', type: 'image', options: { hotspot: true } },
+      ],
+    }),
   ],
   preview: {
     select: {

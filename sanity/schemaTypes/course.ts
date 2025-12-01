@@ -144,6 +144,33 @@ export default defineType({
         },
       ],
     }),
+
+    // Campos de SEO
+    defineField({
+      name: 'seoTitle',
+      title: 'Título SEO (Meta Title)',
+      type: 'string',
+      description: 'Título otimizado para motores de busca (50-60 caracteres). Se não preencher, usa o título do curso.',
+      validation: (rule) => rule.max(60),
+    }),
+    defineField({
+      name: 'seoDescription',
+      title: 'Meta Description',
+      type: 'text',
+      description: 'Descrição para Google (150-160 caracteres). Se não preencher, usa a descrição curta.',
+      validation: (rule) => rule.max(160),
+      rows: 3,
+    }),
+    defineField({
+      name: 'keywords',
+      title: 'Palavras-chave (Keywords)',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Palavras-chave relacionadas ao curso para SEO',
+      options: {
+        layout: 'tags',
+      },
+    }),
   ],
   preview: {
     select: {

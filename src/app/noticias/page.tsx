@@ -8,6 +8,26 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Notícias e Artigos Médicos | Med HandsOn",
   description: "Fique por dentro das novidades da medicina, cirurgias ao vivo e artigos científicos selecionados pela equipe Med HandsOn.",
+  keywords: [
+    "notícias medicina",
+    "artigos médicos",
+    "cirurgia plástica",
+    "educação médica",
+    "fellowship medicina",
+    "rinoplastia",
+    "procedimentos cirúrgicos",
+    "carreira médica",
+    "técnicas cirúrgicas",
+  ],
+  alternates: {
+    canonical: "https://medhandson.com.br/noticias",
+  },
+  openGraph: {
+    title: "Notícias e Artigos Médicos | Med HandsOn",
+    description: "Fique por dentro das novidades da medicina, cirurgias ao vivo e artigos científicos selecionados pela equipe Med HandsOn.",
+    url: "https://medhandson.com.br/noticias",
+    type: "website",
+  },
 };
 
 export const revalidate = 60; // Revalidar a cada 60 segundos (ISR)
@@ -15,7 +35,7 @@ export const revalidate = 60; // Revalidar a cada 60 segundos (ISR)
 export default async function BlogPage() {
   const posts = await getAllPosts();
 
-  const jsonLd = {
+  const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [{
@@ -31,12 +51,50 @@ export default async function BlogPage() {
     }]
   };
 
+  const blogJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Blog Med HandsOn",
+    "description": "Notícias e artigos sobre medicina e cirurgia plástica",
+    "url": "https://medhandson.com.br/noticias",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Med HandsOn",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://medhandson.com.br/logo.svg"
+      }
+    },
+    "inLanguage": "pt-BR",
+  };
+
+  const itemListJsonLd = posts.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": posts.map((post: BlogPost, index: number) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "url": `https://medhandson.com.br/noticias/${post.slug}`,
+      "name": post.title,
+    }))
+  } : null;
+
   return (
     <main className="bg-[#EDF2FD] min-h-screen">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+      />
+      {itemListJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+        />
+      )}
       <Header />
       
       {/* Hero Section Simples */}
