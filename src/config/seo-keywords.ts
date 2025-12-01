@@ -112,10 +112,10 @@ export const GLOBAL_KEYWORDS = [
 // Helper function para obter keywords por categoria de post
 export function getKeywordsByCategory(category: string): string[] {
   const categoryMap: Record<string, string[]> = {
-    "Cirurgia Plástica": SEO_KEYWORDS.categorias.cirurgiaPlastica,
-    "Educação Médica": SEO_KEYWORDS.categorias.educacaoMedica,
-    "Carreira": SEO_KEYWORDS.categorias.carreira,
-    "Notícias": SEO_KEYWORDS.categorias.noticias,
+    "Cirurgia Plástica": [...SEO_KEYWORDS.categorias.cirurgiaPlastica],
+    "Educação Médica": [...SEO_KEYWORDS.categorias.educacaoMedica],
+    "Carreira": [...SEO_KEYWORDS.categorias.carreira],
+    "Notícias": [...SEO_KEYWORDS.categorias.noticias],
   };
 
   return categoryMap[category] || [];
