@@ -22,6 +22,16 @@ export const metadata: Metadata = {
   authors: [{ name: "Med HandsOn" }],
   creator: "Med HandsOn",
   publisher: "Med HandsOn",
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.ico', type: 'image/x-icon' },
+    ],
+    apple: [
+      { url: '/favicon.ico', sizes: '180x180', type: 'image/x-icon' },
+    ],
+    shortcut: '/favicon.ico',
+  },
   formatDetection: {
     email: false,
     address: false,

@@ -241,3 +241,5 @@ Com essas implementações, o site Med HandsOn agora tem:
 
 **O site está pronto para ter melhor visibilidade nos motores de busca!** 🚀
 
+
+
