@@ -78,7 +78,7 @@ export function Footer() {
               </a>
             </div>
             <p className="text-gray-500 text-sm mt-6">
-              Desenvolvido por <a href="https://fantomweb.com.br" target="_blank" rel="noopener noreferrer" className="text-white font-medium">Fantom</a>
+              Desenvolvido por <a href="https://kommu.com.br" target="_blank" rel="noopener noreferrer" className="text-white font-medium">KOMMU</a>
             </p>
           </div>
         </div>
