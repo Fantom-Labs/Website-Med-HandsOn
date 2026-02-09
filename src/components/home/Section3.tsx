@@ -19,7 +19,7 @@ export function Section3() {
           width={315}
           height={400}
           className="object-cover object-center"
-          style={{ maxWidth: '315px', width: '100%', height: 'auto' }}
+          style={{ width: 'auto', height: 'auto', maxWidth: '100%' }}
           priority
         />
       </div>

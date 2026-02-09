@@ -15,7 +15,7 @@ const courses = [
     features: [
       { icon: "/VIDEO.svg", text: "Aulas gravadas" },
       { icon: "/PRATICA.svg", text: "Aulas práticas" },
-      { icon: "/INJEÇÃO.svg", text: "Participe de cirurgias" },
+      { icon: "/INJECAO.svg", text: "Participe de cirurgias" },
       { icon: "/PROFILE.svg", text: "Dr. Gustavo Motta" }
     ]
   },
@@ -121,6 +121,7 @@ export function Section4() {
                     src={courses[currentSlide].image}
                     alt={courses[currentSlide].title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover rounded-2xl"
                     priority
                   />

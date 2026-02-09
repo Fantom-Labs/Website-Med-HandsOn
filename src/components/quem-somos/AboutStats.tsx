@@ -8,12 +8,12 @@ export function AboutStats() {
       description: 'Nada de simulação. Nada de "quase real". Aqui, você aprende onde tudo acontece: no centro cirúrgico com pacientes reais.'
     },
     {
-      icon: "/segurança.svg",
+      icon: "/seguranca.svg",
       title: "Segurança",
       description: "Todo procedimento é conduzido com rigor ético, supervisão total e protocolos hospitalares completos."
     },
     {
-      icon: "/excelencia.svg",
+      icon: "/Excelencia.svg",
       title: "Excelência",
       description: "Os mentores são especialistas que atuam na linha de frente da medicina, com experiência sólida e dezenas, ou muitas vezes centenas, de cirurgias realizadas."
     }

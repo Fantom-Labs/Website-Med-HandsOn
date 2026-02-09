@@ -91,6 +91,7 @@ export async function getCourseBySlug(slug: string): Promise<Course> {
       title,
       "slug": slug.current,
       mainImage,
+      cardImage,
       shortDescription,
       fullDescription,
       startDate,

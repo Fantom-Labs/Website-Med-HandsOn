@@ -11,6 +11,9 @@ export function AboutHero() {
           src="/images/hero-quemsomosmobile.png"
           alt="Background"
           fill
+          sizes="100vw"
+          quality={100}
+          unoptimized
           className="object-cover object-top"
           priority
         />
@@ -23,6 +26,9 @@ export function AboutHero() {
           src="/images/hero-quemsomos.png"
           alt="Background"
           fill
+          sizes="100vw"
+          quality={100}
+          unoptimized
           className="object-cover object-center"
           priority
         />

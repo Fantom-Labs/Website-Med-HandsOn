@@ -73,7 +73,7 @@ const components: PortableTextComponents = {
             alt={value.alt || ' '}
             width={800}
             height={600}
-            className="rounded-lg w-full"
+            className="rounded-lg w-full h-auto"
           />
           {value.caption && (
             <figcaption className="text-center text-sm text-gray-500 mt-2">

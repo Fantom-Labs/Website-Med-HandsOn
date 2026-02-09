@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -22,6 +22,9 @@ export function HeroSection() {
           src="/images/hero-img.png"
           alt="Background"
           fill
+          sizes="100vw"
+          quality={100}
+          unoptimized
           className="object-cover object-center"
           priority
         />
@@ -81,6 +84,7 @@ export function HeroSection() {
                     src="/images/MINIATURAS HEADING.png" 
                     alt="Alunos" 
                     fill 
+                    sizes="(max-width: 768px) 156px, 144px"
                     className="object-contain"
                   />
                 </div>
@@ -95,6 +99,7 @@ export function HeroSection() {
                   src="/images/miniaturas-mobile.png" 
                   alt="Alunos" 
                   fill 
+                  sizes="203px"
                   className="object-contain"
                 />
               </div>

@@ -146,7 +146,7 @@ export default async function CoursePage({ params }: PageProps) {
           duration={course.duration || "A definir"}
           location={course.location || "Online / Presencial"}
           imageSrc={course.mainImage && urlFor(course.mainImage) ? urlFor(course.mainImage)?.url() || "" : undefined}
-          mobileImageSrc={course.mainImage && urlFor(course.mainImage) ? urlFor(course.mainImage)?.url() || "" : undefined}
+          mobileImageSrc={course.cardImage && urlFor(course.cardImage) ? urlFor(course.cardImage)?.url() || "" : (course.mainImage && urlFor(course.mainImage) ? urlFor(course.mainImage)?.url() || "" : undefined)}
           mobileBgColor="#091222"
           enrollmentLink={course.enrollmentLink}
         />
