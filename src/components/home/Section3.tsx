@@ -10,7 +10,7 @@ export function Section3() {
     <section className="flex flex-col md:flex-row w-full" style={{ backgroundColor: 'transparent' }}>
       {/* Left Side - Image */}
       <div 
-        className="w-full md:w-1/2 flex items-center justify-center md:justify-end py-8 md:py-24 md:pr-[160px]" 
+        className="w-full md:w-1/2 md:min-w-[300px] flex items-center justify-center md:justify-end py-8 md:py-24 md:pr-8 lg:pr-16 xl:pr-[160px]" 
         style={{ backgroundColor: 'transparent' }}
       >
         <Image
@@ -18,7 +18,7 @@ export function Section3() {
           alt="Profissional médico em cirurgia"
           width={315}
           height={400}
-          className="object-cover object-center"
+          className="object-cover object-center md:min-w-[300px]"
           style={{ width: 'auto', height: 'auto', maxWidth: '100%' }}
           priority
         />

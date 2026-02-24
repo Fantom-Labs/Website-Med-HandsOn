@@ -12,10 +12,41 @@ export function ContactSection() {
   });
 
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "success" | "error" | "cooldown">("idle");
+  const [cooldownSeconds, setCooldownSeconds] = useState(0);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Rate Limiting: Verificar última submissão
+    const lastSubmitTime = localStorage.getItem('lastContactSubmit');
+    const now = Date.now();
+    const COOLDOWN_MS = 60000; // 60 segundos
+
+    if (lastSubmitTime) {
+      const timeSinceLastSubmit = now - parseInt(lastSubmitTime);
+      
+      if (timeSinceLastSubmit < COOLDOWN_MS) {
+        const remainingSeconds = Math.ceil((COOLDOWN_MS - timeSinceLastSubmit) / 1000);
+        setCooldownSeconds(remainingSeconds);
+        setStatus("cooldown");
+        
+        // Atualizar contador a cada segundo
+        const countdown = setInterval(() => {
+          setCooldownSeconds(prev => {
+            if (prev <= 1) {
+              clearInterval(countdown);
+              setStatus("idle");
+              return 0;
+            }
+            return prev - 1;
+          });
+        }, 1000);
+        
+        return;
+      }
+    }
+
     setLoading(true);
     setStatus("idle");
 
@@ -31,13 +62,15 @@ export function ContactSection() {
     };
 
     try {
-      console.log("Enviando email..."); // Debug log
+      console.log("Enviando email...");
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
       
-      setStatus("success");
-      setFormData({ name: "", email: "", message: "" }); // Limpa o formulário
+      // Salvar timestamp do envio bem-sucedido
+      localStorage.setItem('lastContactSubmit', now.toString());
       
-      // Remove a mensagem de sucesso após 5 segundos
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+      
       setTimeout(() => setStatus("idle"), 5000);
     } catch (error) {
       console.error("Erro ao enviar email:", error);
@@ -132,10 +165,12 @@ export function ContactSection() {
               <div className="pt-2 flex flex-col gap-3">
                   <button
                     type="submit"
-                    disabled={loading}
+                    disabled={loading || status === "cooldown"}
                     className="bg-[#0085FF] hover:bg-[#006bb3] text-white font-medium px-8 py-3 rounded-lg transition-colors w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                   >
-                    {loading ? "Enviando..." : "Enviar mensagem"}
+                    {loading ? "Enviando..." : 
+                     status === "cooldown" ? `Aguarde ${cooldownSeconds}s` : 
+                     "Enviar mensagem"}
                   </button>
 
                   {status === "success" && (
@@ -146,6 +181,11 @@ export function ContactSection() {
                   {status === "error" && (
                     <p className="text-red-400 text-sm">
                       ✗ Ocorreu um erro ao enviar. Por favor, tente novamente ou contate-nos diretamente.
+                    </p>
+                  )}
+                  {status === "cooldown" && (
+                    <p className="text-yellow-400 text-sm">
+                      ⏳ Por favor aguarde {cooldownSeconds} segundos antes de enviar outra mensagem.
                     </p>
                   )}
               </div>
