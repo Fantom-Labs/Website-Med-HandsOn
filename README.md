@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Med HandsOn — Institutional Website
 
-## Getting Started
+> Website institucional desenvolvido para a **Med HandsOn**, escola médica brasileira especializada em ensino prático com pacientes reais.
 
-First, run the development server:
+🌐 **Live:** [medhandson.com.br](https://medhandson.com.br)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Overview
+
+This is a production website built for a medical education company in Brazil. The project required a performance-focused, content-driven frontend with smooth UX, clear information hierarchy, and fast load times — since the primary audience is medical professionals researching high-ticket courses.
+
+The site covers the full institutional presence: homepage, course listings, course detail pages, news/blog, about, and legal pages.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| Image Optimization | Next.js `<Image>` with responsive srcsets |
+| Hosting/Deploy | Vercel |
+| Icons/Assets | Custom SVGs |
+
+---
+
+## Key Features
+
+- **App Router architecture** — file-based routing with layout composition and server components where applicable
+- **Responsive design** — fully adapted for mobile, tablet, and desktop; hero section switches between dedicated mobile and desktop image assets
+- **Performance-optimized images** — Next.js automatic WebP conversion and lazy loading throughout
+- **SEO-ready** — semantic HTML structure, descriptive `alt` attributes, and proper heading hierarchy
+- **Component-based structure** — reusable UI blocks (cards, feature icons, FAQ accordion) built to scale with new course pages
+- **Accessibility considerations** — keyboard-navigable nav, contrast-compliant color choices
+
+---
+
+## Project Structure
+
+```
+/
+├── app/
+│   ├── page.tsx              # Homepage
+│   ├── cursos/               # Course listing + dynamic [slug] pages
+│   ├── noticias/             # News section
+│   ├── quem-somos/           # About + contact
+│   ├── termos/               # Terms of use
+│   └── privacidade/          # Privacy policy
+├── components/               # Shared UI components
+├── public/
+│   ├── images/               # Static assets
+│   └── *.svg                 # Icon set
+└── styles/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Design Decisions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Content-first layout** — The homepage was structured around conversion: hero with urgency signal ("últimas vagas"), methodology breakdown, course cards, and FAQ — following a natural decision funnel for a high-consideration purchase.
 
-## Learn More
+**Custom SVG icon system** — All feature icons are custom SVGs matching the brand identity, keeping the bundle lean without a third-party icon library.
 
-To learn more about Next.js, take a look at the following resources:
+**Mobile-specific assets** — The hero section uses separate image variants for mobile and desktop to ensure proper framing and loading performance on smaller screens.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## About the Project
 
-## Deploy on Vercel
+Built by [Fantom](https://fantomweb.com.br) — a design and technology agency focused on custom websites and SaaS products. Partnership with KOMMU Marketing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+Proprietary. All rights reserved — Med HandsOn © 2026.
