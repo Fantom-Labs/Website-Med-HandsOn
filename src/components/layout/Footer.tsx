@@ -55,7 +55,7 @@ export function Footer() {
                 medhandson.br@gmail.com
               </li>
               <li className="text-gray-400 text-sm">
-                +55 (11) 99999-9999
+                +55 (81) 9219-0240
               </li>
               <li className="text-gray-400 text-sm">
                 Recife, PE

@@ -32,7 +32,7 @@ export function HeroSection() {
 
       {/* WhatsApp Floating Button */}
       <a
-        href="https://wa.me/5511999999999" // Substituir pelo número real
+        href="https://wa.me/558192190240"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed right-8 bottom-8 z-50 w-16 h-16 bg-[#1F1F1F] hover:bg-[#292929] rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 border border-white/10"
