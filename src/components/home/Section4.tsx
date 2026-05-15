@@ -108,92 +108,99 @@ export function Section4({ courses }: Props) {
           </div>
         </div>
 
-        {/* Course Card */}
-        <div 
-          className="rounded-3xl overflow-hidden w-full"
+        {/* Course Cards — all rendered, switched via opacity */}
+        <div
+          className="relative rounded-3xl overflow-hidden w-full"
           style={{ backgroundColor: '#EDF2FD', maxWidth: '1280px' }}
         >
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-               {/* Image Side */}
-               <div className="relative h-[250px] sm:h-[400px] md:h-auto p-4 md:p-8">
-                 <div className="relative w-full h-full">
-                  <Image
-                    src={urlFor(courses[currentSlide].cardImage ?? courses[currentSlide].mainImage)?.width(800).height(600).url() ?? ""}
-                    alt={courses[currentSlide].title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover rounded-2xl"
-                    priority
-                  />
-                 </div>
-               </div>
+          {courses.map((course, index) => (
+            <div
+              key={course._id}
+              className={`transition-opacity duration-200 ${index === currentSlide ? 'opacity-100 relative' : 'opacity-0 absolute inset-0 pointer-events-none'}`}
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+                {/* Image Side */}
+                <div className="relative h-[250px] sm:h-[400px] md:h-auto p-4 md:p-8">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={urlFor(course.cardImage ?? course.mainImage)?.width(800).height(600).url() ?? ""}
+                      alt={course.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover rounded-2xl"
+                      priority
+                    />
+                  </div>
+                </div>
 
-               {/* Content Side */}
-               <div className="p-6 md:p-12 flex flex-col justify-center">
-                 <h3
-                   className="text-[20px] md:text-[24px] font-bold mb-4"
-                   style={{
-                     fontFamily: 'var(--font-open-sans), sans-serif',
-                     color: '#111827',
-                     maxWidth: '400px'
-                   }}
-                 >
-                   {courses[currentSlide].title}
-                 </h3>
+                {/* Content Side */}
+                <div className="p-6 md:p-12 flex flex-col justify-center">
+                  <h3
+                    className="text-[20px] md:text-[24px] font-bold mb-4"
+                    style={{
+                      fontFamily: 'var(--font-open-sans), sans-serif',
+                      color: '#111827',
+                      maxWidth: '400px'
+                    }}
+                  >
+                    {course.title}
+                  </h3>
 
-                 <p
-                   className="text-sm md:text-base mb-6"
-                   style={{
-                     fontFamily: 'var(--font-open-sans), sans-serif',
-                     color: '#111827',
-                     maxWidth: '400px'
-                   }}
-                 >
-                   {courses[currentSlide].shortDescription}
-                 </p>
+                  <p
+                    className="text-sm md:text-base mb-6"
+                    style={{
+                      fontFamily: 'var(--font-open-sans), sans-serif',
+                      color: '#111827',
+                      maxWidth: '400px'
+                    }}
+                  >
+                    {course.shortDescription}
+                  </p>
 
-                 {/* Features */}
-                 <div className="space-y-3 mb-6">
-                   {buildFeatures(courses[currentSlide]).map((feature, index) => (
-                     <div key={index} className="flex items-center gap-3">
-                       <img
-                         src={feature.icon}
-                         alt=""
-                         className="w-5 h-5 md:w-6 md:h-6"
-                         style={{ minHeight: '20px' }}
-                       />
-                       <span
-                         className="text-sm md:text-base"
-                         style={{
-                           fontFamily: 'var(--font-open-sans), sans-serif',
-                           color: '#111827'
-                         }}
-                       >
-                         {feature.text}
-                       </span>
-                     </div>
-                   ))}
-                 </div>
+                  {/* Features */}
+                  <div className="space-y-3 mb-6">
+                    {buildFeatures(course).map((feature, i) => (
+                      <div key={i} className="flex items-center gap-3">
+                        <img
+                          src={feature.icon}
+                          alt=""
+                          className="w-5 h-5 md:w-6 md:h-6"
+                          style={{ minHeight: '20px' }}
+                        />
+                        <span
+                          className="text-sm md:text-base"
+                          style={{
+                            fontFamily: 'var(--font-open-sans), sans-serif',
+                            color: '#111827'
+                          }}
+                        >
+                          {feature.text}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
 
-                {/* Button */}
-                <Link
-                  href={`/cursos/${courses[currentSlide].slug}`}
-                  className="inline-flex items-center justify-center gap-2 text-white w-full md:w-fit"
-                  style={{
-                    background: 'linear-gradient(180deg, #0085FF 0%, #00488A 100%)',
-                    borderRadius: '8px',
-                    padding: '16px 32px',
-                    fontFamily: 'var(--font-open-sans), sans-serif',
-                    fontSize: '16px',
-                    fontWeight: 500
-                  }}
-                >
-                  Conhecer o curso
-                  <ArrowUpRight className="w-5 h-5" />
-                </Link>
-               </div>
-             </div>
-         </div>
+                  {/* Button */}
+                  <Link
+                    href={`/cursos/${course.slug}`}
+                    className="inline-flex items-center justify-center gap-2 text-white w-full md:w-fit"
+                    style={{
+                      background: 'linear-gradient(180deg, #0085FF 0%, #00488A 100%)',
+                      borderRadius: '8px',
+                      padding: '16px 32px',
+                      fontFamily: 'var(--font-open-sans), sans-serif',
+                      fontSize: '16px',
+                      fontWeight: 500
+                    }}
+                  >
+                    Conhecer o curso
+                    <ArrowUpRight className="w-5 h-5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
        </div>
      </section>
   );
