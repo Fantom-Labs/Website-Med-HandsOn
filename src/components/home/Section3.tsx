@@ -9,16 +9,48 @@ export function Section3() {
   return (
     <section className="flex flex-col md:flex-row w-full" style={{ backgroundColor: 'transparent' }}>
       {/* Left Side - Image */}
-      <div 
-        className="w-full md:w-1/2 md:min-w-[300px] flex items-center justify-center md:justify-end py-8 md:py-24 md:pr-8 lg:pr-16 xl:pr-[160px]" 
+      <div
+        className="w-full md:w-1/2 md:min-w-[300px] md:flex md:items-center md:justify-end md:py-24 md:pr-8 lg:pr-16 xl:pr-[160px]"
         style={{ backgroundColor: 'transparent' }}
       >
+        {/* Mobile: 3 images in a row, side images go off-screen */}
+        <div className="flex md:hidden overflow-hidden w-full py-8">
+          <div className="flex items-end shrink-0 gap-4" style={{ marginLeft: 'calc(-25vw - 16px)' }}>
+            <Image
+              src="/images/image s3-2.png"
+              alt="Procedimento cirúrgico"
+              width={315}
+              height={400}
+              className="object-cover shrink-0"
+              style={{ width: '50vw', height: 'auto' }}
+            />
+            <Image
+              src="/images/image s3.png"
+              alt="Profissional médico em cirurgia"
+              width={315}
+              height={400}
+              className="object-cover shrink-0"
+              style={{ width: '50vw', height: 'auto' }}
+              priority
+            />
+            <Image
+              src="/images/image s3-3.png"
+              alt="Treinamento cirúrgico"
+              width={315}
+              height={400}
+              className="object-cover shrink-0"
+              style={{ width: '50vw', height: 'auto' }}
+            />
+          </div>
+        </div>
+
+        {/* Desktop: original image, unchanged */}
         <Image
           src="/images/image s3.png"
           alt="Profissional médico em cirurgia"
           width={315}
           height={400}
-          className="object-cover object-center md:min-w-[300px]"
+          className="hidden md:block object-cover object-center md:min-w-[300px]"
           style={{ width: 'auto', height: 'auto', maxWidth: '100%' }}
           priority
         />
