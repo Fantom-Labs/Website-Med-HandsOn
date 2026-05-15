@@ -4,25 +4,27 @@ import { useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Course } from "@/lib/sanity.types";
+import { urlFor } from "@/lib/sanity.client";
 
-const courses = [
-  {
-    id: 1,
-    title: "Formação em Rinoplastia Ultrassônica Avançada",
-    description: "Domine as habilidades necessárias para realizar Rinoplastia com formação completa com pacientes reais.",
-    image: "/images/img-rp.png",
-    link: "/cursos/rinoplastia-avancada",
-    features: [
-      { icon: "/VIDEO.svg", text: "Aulas gravadas" },
-      { icon: "/PRATICA.svg", text: "Aulas práticas" },
-      { icon: "/INJECAO.svg", text: "Participe de cirurgias" },
-      { icon: "/PROFILE.svg", text: "Dr. Gustavo Motta" }
-    ]
-  },
-  // Adicione mais cursos aqui
-];
+const FEATURE_ICONS = ["/VIDEO.svg", "/PRATICA.svg", "/INJECAO.svg"];
 
-export function Section4() {
+function buildFeatures(course: Course) {
+  const items = (course.features ?? []).slice(0, 3).map((text, i) => ({
+    icon: FEATURE_ICONS[i],
+    text,
+  }));
+  if (course.instructor?.name) {
+    items.push({ icon: "/PROFILE.svg", text: course.instructor.name });
+  }
+  return items;
+}
+
+interface Props {
+  courses: Course[];
+}
+
+export function Section4({ courses }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const nextSlide = () => {
@@ -60,11 +62,10 @@ export function Section4() {
             <div className="flex gap-4">
               <button
                 onClick={prevSlide}
-                className="flex items-center justify-center transition-all hover:bg-white/20"
+                className="flex items-center justify-center bg-white/10 hover:bg-white/25 transition-colors"
                 style={{
                   width: '52px',
                   height: '52px',
-                  background: 'rgba(255, 255, 255, 0.1)',
                   border: '0.8px solid rgba(255, 255, 255, 0.1)',
                   borderRadius: '32.8px'
                 }}
@@ -75,11 +76,10 @@ export function Section4() {
 
               <button
                 onClick={nextSlide}
-                className="flex items-center justify-center transition-all hover:bg-white/20"
+                className="flex items-center justify-center bg-white/10 hover:bg-white/25 transition-colors"
                 style={{
                   width: '52px',
                   height: '52px',
-                  background: 'rgba(255, 255, 255, 0.1)',
                   border: '0.8px solid rgba(255, 255, 255, 0.1)',
                   borderRadius: '32.8px'
                 }}
@@ -118,7 +118,7 @@ export function Section4() {
                <div className="relative h-[250px] sm:h-[400px] md:h-auto p-4 md:p-8">
                  <div className="relative w-full h-full">
                   <Image
-                    src={courses[currentSlide].image}
+                    src={urlFor(courses[currentSlide].cardImage ?? courses[currentSlide].mainImage)?.width(800).height(600).url() ?? ""}
                     alt={courses[currentSlide].title}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -130,9 +130,9 @@ export function Section4() {
 
                {/* Content Side */}
                <div className="p-6 md:p-12 flex flex-col justify-center">
-                 <h3 
+                 <h3
                    className="text-[20px] md:text-[24px] font-bold mb-4"
-                   style={{ 
+                   style={{
                      fontFamily: 'var(--font-open-sans), sans-serif',
                      color: '#111827',
                      maxWidth: '400px'
@@ -141,30 +141,30 @@ export function Section4() {
                    {courses[currentSlide].title}
                  </h3>
 
-                 <p 
+                 <p
                    className="text-sm md:text-base mb-6"
-                   style={{ 
+                   style={{
                      fontFamily: 'var(--font-open-sans), sans-serif',
                      color: '#111827',
                      maxWidth: '400px'
                    }}
                  >
-                   {courses[currentSlide].description}
+                   {courses[currentSlide].shortDescription}
                  </p>
 
                  {/* Features */}
                  <div className="space-y-3 mb-6">
-                   {courses[currentSlide].features.map((feature, index) => (
+                   {buildFeatures(courses[currentSlide]).map((feature, index) => (
                      <div key={index} className="flex items-center gap-3">
-                       <img 
-                         src={feature.icon} 
-                         alt="" 
+                       <img
+                         src={feature.icon}
+                         alt=""
                          className="w-5 h-5 md:w-6 md:h-6"
                          style={{ minHeight: '20px' }}
                        />
-                       <span 
+                       <span
                          className="text-sm md:text-base"
-                         style={{ 
+                         style={{
                            fontFamily: 'var(--font-open-sans), sans-serif',
                            color: '#111827'
                          }}
@@ -177,7 +177,7 @@ export function Section4() {
 
                 {/* Button */}
                 <Link
-                  href={courses[currentSlide].link || "/cursos"}
+                  href={`/cursos/${courses[currentSlide].slug}`}
                   className="inline-flex items-center justify-center gap-2 text-white w-full md:w-fit"
                   style={{
                     background: 'linear-gradient(180deg, #0085FF 0%, #00488A 100%)',

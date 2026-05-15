@@ -75,6 +75,7 @@ export async function getAllCourses(): Promise<Course[]> {
       installments,
       mentalTrigger,
       features,
+      instructor { name },
       seoTitle,
       seoDescription,
       keywords

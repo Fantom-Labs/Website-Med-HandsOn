@@ -6,7 +6,10 @@ import { Section4 } from "@/components/home/Section4";
 import { Section5 } from "@/components/home/Section5";
 import { Section6 } from "@/components/home/Section6";
 import { Section7 } from "@/components/home/Section7";
+import { getAllCourses } from "@/lib/sanity.queries";
 import type { Metadata } from "next";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   description: "Transforme sua carreira médica com a metodologia Med HandsOn. Aprenda técnicas avançadas operando pacientes reais sob supervisão de especialistas renomados.",
@@ -25,14 +28,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const courses = await getAllCourses();
+
   return (
     <>
       <Header />
       <HeroSection />
       <DiferenciaisSection />
       <Section3 />
-      <Section4 />
+      {courses.length > 0 && <Section4 courses={courses} />}
       <Section5 />
       <Section6 />
       <Section7 />
