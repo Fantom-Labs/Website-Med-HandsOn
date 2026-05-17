@@ -40,17 +40,7 @@ export function HeroSection() {
     }, 20000);
   };
 
-  const goToSlide = (index: number) => {
-    if (index === currentSlide) return;
-    setCardVisible(false);
-    setTimeout(() => {
-      setCurrentSlide(index);
-      setCardVisible(true);
-    }, 500);
-    startInterval();
-  };
-
-  useEffect(() => {
+useEffect(() => {
     startInterval();
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   }, []);
@@ -126,7 +116,7 @@ export function HeroSection() {
           {/* Title Section */}
           <div className="relative mb-0 md:mb-6 w-full">
             <h1 
-              className="text-[36px] sm:text-4xl md:text-[52px] font-semibold leading-tight text-center md:text-left"
+              className="text-[36px] sm:text-4xl md:text-[46px] font-semibold leading-tight text-center md:text-left"
               style={{ fontFamily: 'var(--font-open-sans), sans-serif' }}
             >
               <div className="flex items-center justify-center md:justify-start gap-2 md:gap-3 flex-wrap">
@@ -194,21 +184,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Dot Navigation — bottom center, desktop only */}
-      <div className="hidden md:flex absolute bottom-6 left-0 right-0 z-30 justify-center items-center gap-3">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            aria-label={`Slide ${index + 1}`}
-            className={`rounded-full transition-all duration-300 ${
-              index === currentSlide
-                ? 'w-6 h-2.5 bg-white'
-                : 'w-2.5 h-2.5 bg-white/40 hover:bg-white/70'
-            }`}
-          />
-        ))}
-      </div>
+
     </section>
   );
 }
