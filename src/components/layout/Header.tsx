@@ -3,11 +3,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href.split("#")[0]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full" style={{ backgroundColor: '#FFFFFF', height: '80px' }}>
@@ -27,16 +32,16 @@ export function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/" className="font-semibold transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
+            <Link href="/" className={`${isActive('/') ? 'font-bold' : 'font-semibold'} transition-all`} style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
               Home
             </Link>
-            <Link href="/noticias" className="font-semibold transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
+            <Link href="/noticias" className={`${isActive('/noticias') ? 'font-bold' : 'font-semibold'} transition-all`} style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
               Notícias
             </Link>
-            <Link href="/quem-somos" className="font-semibold transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
+            <Link href="/quem-somos" className={`${isActive('/quem-somos') ? 'font-bold' : 'font-semibold'} transition-all`} style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
               Quem Somos
             </Link>
-            <Link href="/quem-somos#contato" className="font-semibold transition-colors" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
+            <Link href="/quem-somos#contato" className="font-semibold transition-all" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
               Contato
             </Link>
           </nav>
@@ -101,33 +106,33 @@ export function Header() {
 
           <div className="flex-1 overflow-y-auto p-4 space-y-6">
             <nav className="space-y-4">
-              <Link 
-                href="/" 
-                className="block font-medium text-lg hover:text-primary-600"
+              <Link
+                href="/"
+                className={`block text-lg ${isActive('/') ? 'font-bold' : 'font-medium'}`}
                 style={{ color: '#252525', fontFamily: 'var(--font-open-sans), sans-serif' }}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
-              <Link 
-                href="/noticias" 
-                className="block font-medium text-lg hover:text-primary-600"
+              <Link
+                href="/noticias"
+                className={`block text-lg ${isActive('/noticias') ? 'font-bold' : 'font-medium'}`}
                 style={{ color: '#252525', fontFamily: 'var(--font-open-sans), sans-serif' }}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Notícias
               </Link>
-              <Link 
-                href="/quem-somos" 
-                className="block font-medium text-lg hover:text-primary-600"
+              <Link
+                href="/quem-somos"
+                className={`block text-lg ${isActive('/quem-somos') ? 'font-bold' : 'font-medium'}`}
                 style={{ color: '#252525', fontFamily: 'var(--font-open-sans), sans-serif' }}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Quem Somos
               </Link>
-              <Link 
-                href="/quem-somos#contato" 
-                className="block font-medium text-lg hover:text-primary-600"
+              <Link
+                href="/quem-somos#contato"
+                className="block font-medium text-lg"
                 style={{ color: '#252525', fontFamily: 'var(--font-open-sans), sans-serif' }}
                 onClick={() => setIsMenuOpen(false)}
               >
