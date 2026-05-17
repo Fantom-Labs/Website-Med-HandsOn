@@ -116,11 +116,17 @@ export function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-center">
             <Link
               href="/cursos"
-                className="bg-[#077DEA] hover:bg-[#0062B9] text-white px-8 py-4 rounded-lg font-medium transition-colors text-base flex items-center gap-2"
-              >
-                Ver cursos disponíveis
-                <ArrowUpRight className="w-4 h-4" />
-              </Link>
+              className="flex items-center gap-2 text-white px-6 py-4 transition-colors"
+              style={{
+                background: 'linear-gradient(180deg, #0085FF 0%, #00488A 100%)',
+                borderRadius: '8px',
+                fontSize: '18px',
+                fontWeight: 500
+              }}
+            >
+              Ver cursos disponíveis
+              <ArrowUpRight className="ml-2 h-4 w-4" />
+            </Link>
               <Link
                 href="/quem-somos"
                 className="hidden sm:flex text-gray-300 hover:text-white px-8 py-4 font-medium transition-colors text-base items-center gap-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10"
