@@ -2,9 +2,59 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Calendar } from "lucide-react";
 
+const slides = [
+  {
+    image: '/images/hero-img.png',
+    card: {
+      title: 'Rinoplastia Ultrassônica',
+      description: 'Domine as habilidades necessárias para realizar a Rinoplastia com pacientes reais.',
+      link: '/cursos/rinoplastia-avancada',
+    },
+  },
+  {
+    image: '/images/hero-img2.png',
+    card: {
+      title: 'SpineEndo Experience',
+      description: 'Domine a cirurgia endoscópica da coluna com prática Hands-on.',
+      link: '/cursos/spineendo-experience',
+    },
+  },
+];
+
 export function HeroSection() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [cardVisible, setCardVisible] = useState(true);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const startInterval = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setCardVisible(false);
+      setTimeout(() => {
+        setCurrentSlide(prev => (prev + 1) % slides.length);
+        setCardVisible(true);
+      }, 500);
+    }, 20000);
+  };
+
+  const goToSlide = (index: number) => {
+    if (index === currentSlide) return;
+    setCardVisible(false);
+    setTimeout(() => {
+      setCurrentSlide(index);
+      setCardVisible(true);
+    }, 500);
+    startInterval();
+  };
+
+  useEffect(() => {
+    startInterval();
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+  }, []);
+
   return (
     <section className="relative bg-[#09111F] text-white pt-28 pb-16 md:py-32 overflow-hidden min-h-[600px] md:min-h-[650px] 2xl:min-h-[800px] flex items-center">
       {/* Mobile Background */}
@@ -16,18 +66,21 @@ export function HeroSection() {
         }}
       />
 
-      {/* Desktop Background Image */}
+      {/* Desktop Background Images — crossfade */}
       <div className="absolute inset-0 z-0 hidden md:block">
-        <Image
-          src="/images/hero-img.png"
-          alt="Background"
-          fill
-          sizes="100vw"
-          quality={100}
-          unoptimized
-          className="object-cover object-center"
-          priority
-        />
+        {slides.map((slide, index) => (
+          <Image
+            key={slide.image}
+            src={slide.image}
+            alt="Background"
+            fill
+            sizes="100vw"
+            quality={100}
+            unoptimized
+            className={`object-cover object-center transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+            priority={index === 0}
+          />
+        ))}
       </div>
 
       {/* WhatsApp Floating Button */}
@@ -43,17 +96,19 @@ export function HeroSection() {
       <div className="container mx-auto px-4 md:px-6 relative z-20">
         {/* Card Flutuante com Blur */}
         <div className="hidden lg:flex flex-col justify-center absolute left-[60px] -bottom-[90px] max-w-[350px] w-full h-[210px] bg-[#0f1c2e]/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-2xl z-30">
-          <h3 className="text-2xl font-bold text-white mb-3">Rinoplastia Ultrassônica</h3>
-          <p className="text-gray-200 text-[14px] mb-2 leading-relaxed">
-            Domine as habilidades necessárias para realizar a Rinoplastia com pacientes reais.
-          </p>
-          <Link
-            href="/cursos/rinoplastia-avancada"
-            className="flex items-center justify-between w-full bg-white/10 hover:bg-white/20 border border-white/10 rounded-lg px-6 py-4 transition-all group"
-          >
-            <span className="font-medium text-white">Conhecer o curso</span>
-            <ArrowUpRight className="w-5 h-5 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
+          <div className={`transition-opacity duration-500 ${cardVisible ? 'opacity-100' : 'opacity-0'}`}>
+            <h3 className="text-2xl font-bold text-white mb-3">{slides[currentSlide].card.title}</h3>
+            <p className="text-gray-200 text-[14px] mb-2 leading-relaxed">
+              {slides[currentSlide].card.description}
+            </p>
+            <Link
+              href={slides[currentSlide].card.link}
+              className="flex items-center justify-between w-full bg-white/10 hover:bg-white/20 border border-white/10 rounded-lg px-6 py-4 transition-all group"
+            >
+              <span className="font-medium text-white">Conhecer o curso</span>
+              <ArrowUpRight className="w-5 h-5 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+          </div>
         </div>
 
       <div className="flex justify-center md:justify-end mb-[110px]">
@@ -137,6 +192,22 @@ export function HeroSection() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Dot Navigation — bottom center, desktop only */}
+      <div className="hidden md:flex absolute bottom-6 left-0 right-0 z-30 justify-center items-center gap-3">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            aria-label={`Slide ${index + 1}`}
+            className={`rounded-full transition-all duration-300 ${
+              index === currentSlide
+                ? 'w-6 h-2.5 bg-white'
+                : 'w-2.5 h-2.5 bg-white/40 hover:bg-white/70'
+            }`}
+          />
+        ))}
       </div>
     </section>
   );
