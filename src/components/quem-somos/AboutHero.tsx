@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export function AboutHero() {
   return (
-    <section className="relative bg-[#09111F] text-white pt-28 pb-16 md:py-32 overflow-hidden min-h-[850px] md:min-h-[700px] flex items-end md:items-center">
+    <section id="hero-section" className="relative bg-[#09111F] text-white pt-28 pb-16 md:py-32 overflow-hidden min-h-[850px] md:min-h-[700px] flex items-end md:items-center">
       {/* Background Image Mobile */}
       <div className="absolute inset-0 z-0 md:hidden">
         <Image

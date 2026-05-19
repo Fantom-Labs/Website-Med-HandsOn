@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -10,18 +10,45 @@ import { Button } from "@/components/ui/Button";
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const pagesWithHero = ['/', '/quem-somos'];
+  const [isHeroVisible, setIsHeroVisible] = useState(pagesWithHero.includes(pathname));
+
+  useEffect(() => {
+    const checkHeroVisibility = () => {
+      const hero = document.getElementById('hero-section');
+      if (!hero) {
+        setIsHeroVisible(false);
+        return;
+      }
+      setIsHeroVisible(window.scrollY < 50);
+    };
+
+    checkHeroVisibility();
+    window.addEventListener('scroll', checkHeroVisibility, { passive: true });
+    return () => window.removeEventListener('scroll', checkHeroVisibility);
+  }, [pathname]);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href.split("#")[0]);
 
+  const navLinkColor = isHeroVisible ? '#FFFFFF' : '#252525';
+  const iconColor = isHeroVisible ? 'white' : '#252525';
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full" style={{ backgroundColor: '#FFFFFF', height: '80px' }}>
+    <header
+      className="fixed top-0 left-0 right-0 z-50 w-full"
+      style={{
+        backgroundColor: isHeroVisible ? 'transparent' : '#FFFFFF',
+        height: '80px',
+        transition: 'background-color 0.3s ease',
+      }}
+    >
       <div className="container mx-auto px-4 md:px-6 h-full">
         <div className="flex h-full items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center no-underline border-none outline-none">
             <Image
-              src="/logo.svg"
+              src={isHeroVisible ? '/logo-2.svg' : '/logo.svg'}
               alt="MedHandsOn Logo"
               width={185}
               height={48}
@@ -32,24 +59,24 @@ export function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/" className={`${isActive('/') ? 'font-bold' : 'font-semibold'} transition-all`} style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
+            <Link href="/" className={`${isActive('/') ? 'font-bold' : 'font-semibold'} transition-all`} style={{ color: navLinkColor, fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif', transition: 'color 0.3s ease' }}>
               Home
             </Link>
-            <Link href="/noticias" className={`${isActive('/noticias') ? 'font-bold' : 'font-semibold'} transition-all`} style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
+            <Link href="/noticias" className={`${isActive('/noticias') ? 'font-bold' : 'font-semibold'} transition-all`} style={{ color: navLinkColor, fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif', transition: 'color 0.3s ease' }}>
               Notícias
             </Link>
-            <Link href="/quem-somos" className={`${isActive('/quem-somos') ? 'font-bold' : 'font-semibold'} transition-all`} style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
+            <Link href="/quem-somos" className={`${isActive('/quem-somos') ? 'font-bold' : 'font-semibold'} transition-all`} style={{ color: navLinkColor, fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif', transition: 'color 0.3s ease' }}>
               Quem Somos
             </Link>
-            <Link href="/quem-somos#contato" className="font-semibold transition-all" style={{ color: '#252525', fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif' }}>
+            <Link href="/quem-somos#contato" className="font-semibold transition-all" style={{ color: navLinkColor, fontSize: '16px', fontFamily: 'var(--font-open-sans), sans-serif', transition: 'color 0.3s ease' }}>
               Contato
             </Link>
           </nav>
 
           {/* CTA Button */}
           <div className="hidden md:flex">
-            <Button 
-              asChild 
+            <Button
+              asChild
               className="text-white px-6"
               style={{
                 background: 'linear-gradient(180deg, #0085FF 0%, #00488A 100%)',
@@ -71,7 +98,7 @@ export function Header() {
           {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2"
-            style={{ color: '#252525' }}
+            style={{ color: iconColor, transition: 'color 0.3s ease' }}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

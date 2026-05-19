@@ -46,7 +46,7 @@ useEffect(() => {
   }, []);
 
   return (
-    <section className="relative bg-[#09111F] text-white pt-28 pb-16 md:py-32 overflow-hidden min-h-[600px] md:min-h-[650px] 2xl:min-h-[800px] flex items-center">
+    <section id="hero-section" className="relative bg-[#09111F] text-white pt-28 pb-16 md:py-32 overflow-hidden min-h-[600px] md:min-h-[650px] 2xl:min-h-[800px] flex items-center">
       {/* Mobile Background */}
       <div 
         className="absolute inset-0 z-0 md:hidden"
